@@ -33,6 +33,7 @@ export default function Contact() {
             });
     };
 
+
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-[calc(100vh-8rem)] flex items-center">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
@@ -47,6 +48,7 @@ export default function Contact() {
                     </h1>
                     <p className="text-gray-400 mb-8 max-w-md">
                         I&apos;m currently looking for new opportunities in Data Science ,Fullstack development and Artificial Intelligence. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
+
                     </p>
 
                     <div className="space-y-6">
@@ -103,12 +105,14 @@ export default function Contact() {
                     className="glass p-8 rounded-2xl border border-white/10"
                 >
                     <form ref={form} onSubmit={handleSubmit} className="space-y-6">
+
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">Name</label>
                             <input
                                 type="text"
                                 id="name"
                                 name="user_name"
+
                                 required
                                 className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder-gray-600 focus:border-transparent transition-all"
                                 placeholder="Your Name"
@@ -122,6 +126,7 @@ export default function Contact() {
                                 type="email"
                                 id="email"
                                 name="user_email"
+
                                 required
                                 className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder-gray-600 focus:border-transparent transition-all"
                                 placeholder="your.email@example.com"
@@ -134,6 +139,7 @@ export default function Contact() {
                             <textarea
                                 id="message"
                                 name="message"
+
                                 required
                                 rows={4}
                                 className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder-gray-600 focus:border-transparent transition-all resize-none"
@@ -149,6 +155,7 @@ export default function Contact() {
                             className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {isSent ? "Message Sent!" : isSending ? "Sending..." : (
+
                                 <>
                                     Send Message <Send size={18} />
                                 </>

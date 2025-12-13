@@ -42,7 +42,6 @@ export default function About() {
                             </p>
                         </div>
 
-
                         {/* Experience */}
                         <div className="space-y-6">
                             <h2 className="text-2xl font-semibold flex items-center gap-2">
