@@ -60,13 +60,7 @@ export default function Home() {
           <div className="relative w-64 h-64 md:w-96 md:h-96">
             <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full blur-2xl opacity-30 animate-pulse" />
             <div className="relative w-full h-full rounded-2xl overflow-hidden glass border-2 border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-              <Image
-                src="/images/profile.jpg"
-                alt="R Elumugam"
-                fill
-                className="object-cover"
-                priority
-              />
+              <img src="/images/profile-pic.jpg" alt="R Elumugam" className="object-cover w-full h-full" />
             </div>
           </div>
         </motion.div>
