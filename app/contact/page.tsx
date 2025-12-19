@@ -47,8 +47,7 @@ export default function Contact() {
                         Let&apos;s <span className="gradient-text">Connect</span>
                     </h1>
                     <p className="text-gray-400 mb-8 max-w-md">
-                        I&apos;m currently looking for new opportunities in Data Science ,Fullstack development and Artificial Intelligence. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
-
+                        I&apos;m currently looking for new opportunities in Python Development, AI, Full-Stack Development, and Data Science. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
                     </p>
 
                     <div className="space-y-6">
