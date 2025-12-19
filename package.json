@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "homepage": "https://Elumugam.github.io/My-Portoflio",
+  "homepage": "https://Elumugam.github.io/My-Portfolio",
   "private": true,
   "scripts": {
     "dev": "next dev",
