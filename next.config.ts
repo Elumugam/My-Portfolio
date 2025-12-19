@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
 
   // MUST match your GitHub repo name exactly
   basePath: "/My-Portfolio",
-  assetPrefix: "/My-Portfolio/",
 
   images: {
     unoptimized: true,
