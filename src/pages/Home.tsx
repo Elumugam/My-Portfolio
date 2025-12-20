@@ -4,7 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowRight, Linkedin, Github } from "lucide-react";
 
 export default function Home() {
+    // Safe way to get base URL in Vite
     const baseUrl = import.meta.env.BASE_URL;
+    // Ensure we don't end up with double slashes if BASE_URL ends with /
+    const getImageUrl = (path: string) => {
+        return `${baseUrl}${path.startsWith('/') ? path.slice(1) : path}`;
+    };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -61,7 +66,7 @@ export default function Home() {
                         <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full blur-2xl opacity-30 animate-pulse" />
                         <div className="relative w-full h-full rounded-2xl overflow-hidden glass border-2 border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
                             <img
-                                src={`${baseUrl}images/profile-pic.jpg`}
+                                src={getImageUrl('images/profile-pic.jpg')}
                                 alt="R Elumugam"
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
