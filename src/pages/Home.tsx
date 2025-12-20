@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Linkedin, Github } from "lucide-react";
 
 export default function Home() {
+    const baseUrl = import.meta.env.BASE_URL;
+
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-7xl w-full">
@@ -59,7 +61,7 @@ export default function Home() {
                         <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full blur-2xl opacity-30 animate-pulse" />
                         <div className="relative w-full h-full rounded-2xl overflow-hidden glass border-2 border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
                             <img
-                                src="/My-Portfolio/images/profile-pic.jpg"
+                                src={`${baseUrl}images/profile-pic.jpg`}
                                 alt="R Elumugam"
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
