@@ -29,10 +29,14 @@ jobs:
           node-version: "22"
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Check Versions
+        run: |
+          node -v
+          npm -v
       - name: Install dependencies
         run: npm install
       - name: Build with Next.js
-        run: npm run build
+        run: npx next build
       - name: List files (Debug)
         run: ls -R out
       - name: Upload artifact
