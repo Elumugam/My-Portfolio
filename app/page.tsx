@@ -61,7 +61,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full blur-2xl opacity-30 animate-pulse" />
             <div className="relative w-full h-full rounded-2xl overflow-hidden glass border-2 border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
               <Image
-                src="/My-Portfolio/images/profile-pic.jpg"
+                src="/images/profile-pic.jpg"
                 alt="R Elumugam"
                 fill
                 className="object-cover"
