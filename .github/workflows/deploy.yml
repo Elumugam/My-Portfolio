@@ -3,6 +3,7 @@ name: Deploy Next.js site to Pages
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,11 +24,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.12.0
-          cache: npm
+          node-version: "22"
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build with Next.js
         run: npm run build
@@ -35,7 +36,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: out
+          path: ./out
 
   deploy:
     environment:
