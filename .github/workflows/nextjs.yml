@@ -29,14 +29,18 @@ jobs:
           node-version: "22"
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Check Versions
+      - name: Check Environment
         run: |
           node -v
           npm -v
+          cat next.config.mjs
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          ls -F
+          ls -F node_modules/.bin/next || echo "Next binary not found!"
       - name: Build with Next.js
-        run: npx next build
+        run: npm run build
       - name: List files (Debug)
         run: ls -R out
       - name: Upload artifact
