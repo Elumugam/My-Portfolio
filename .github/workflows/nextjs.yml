@@ -1,6 +1,4 @@
-# v1.0.3
-# Sample workflow for building and deploying a Next.js site to GitHub Pages
-#
+# v1.0.4
 name: Deploy Next.js site to Pages
 
 on:
@@ -26,23 +24,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Check Environment
-        run: |
-          node -v
-          npm -v
-          cat next.config.mjs
+          node-version: "20"
+          cache: 'npm'
       - name: Install dependencies
-        run: |
-          npm install
-          ls -F
-          ls -F node_modules/.bin/next || echo "Next binary not found!"
+        run: npm install
       - name: Build with Next.js
         run: npm run build
-      - name: List files (Debug)
-        run: ls -R out
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
