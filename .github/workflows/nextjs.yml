@@ -29,7 +29,15 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build with Next.js
-        run: npm run build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build_log.txt
+      - name: Upload Build Log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build_log.txt
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
