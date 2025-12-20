@@ -1,9 +1,8 @@
-# v1.0.4
-name: Deploy Next.js site to Pages
+name: Deploy Vite App into GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "master"]
   workflow_dispatch:
 
 permissions:
@@ -21,27 +20,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: 'npm'
+
       - name: Install dependencies
-        run: npm install
-      - name: Build with Next.js
-        run: |
-          set -o pipefail
-          npm run build 2>&1 | tee build_log.txt
-      - name: Upload Build Log
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-log
-          path: build_log.txt
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./dist
 
   deploy:
     environment:
