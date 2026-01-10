@@ -37,6 +37,14 @@ const projects: Project[] = [
         status: "Completed",
         link: "https://www.linkedin.com/posts/elumugam-r-201b06292_ai-genzart-aicreativity-activity-7404883952756396033-2-iU?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEb_zaEBDSQ5tSDee33WJeDpP1JCMc7wWz4",
         thumbnail: "images/project-classmates-plus.png"
+    },
+    {
+        title: "Whatsaapp LinkedIn Post Automation",
+        description: "Automation that triggers LinkedIn post creation and certificate uploads directly from WhatsApp, streamlining professional updates using workflow automation.",
+        tech: ["WhatsApp Automation", "LinkedIn Automation", "Make (Integromat)", "Webhooks", "APIs"],
+        status: "Upcoming",
+        link: "#",
+        thumbnail: "images/project-whatsapp-automation.png"
     }
 ];
 
