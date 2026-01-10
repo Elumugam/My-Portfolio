@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Code2, Rocket, Clock, ExternalLink } from "lucide-react";
+import { Play, Rocket, Clock, Code2, ExternalLink } from "lucide-react";
 import clsx from "clsx";
 
 interface Project {
@@ -40,7 +40,7 @@ const projects: Project[] = [
     }
 ];
 
-const columns = [
+const tabs = [
     { id: "Completed", title: "Completed Projects", icon: <Rocket size={18} /> },
     { id: "In Progress", title: "In Progress", icon: <Clock size={18} /> },
     { id: "Upcoming", title: "Upcoming / Planned", icon: <Code2 size={18} /> }
@@ -49,9 +49,12 @@ const columns = [
 export default function Projects() {
     const [activeTab, setActiveTab] = useState("Completed");
     const baseUrl = import.meta.env.BASE_URL;
+
     const getImageUrl = (path: string) => {
         return `${baseUrl}${path.startsWith('/') ? path.slice(1) : path}`;
     };
+
+    const filteredProjects = projects.filter(p => p.status === activeTab);
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8">
@@ -71,126 +74,117 @@ export default function Projects() {
                     </p>
                 </motion.div>
 
-                {/* Switch / Toggle Control */}
+                {/* Status Switcher */}
                 <div className="flex justify-center mb-12">
                     <div className="inline-flex p-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-x-auto no-scrollbar max-w-full">
-                        {columns.map((col) => (
+                        {tabs.map((tab) => (
                             <button
-                                key={col.id}
-                                onClick={() => setActiveTab(col.id)}
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id as any)}
                                 className={clsx(
                                     "px-6 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 whitespace-nowrap",
-                                    activeTab === col.id
+                                    activeTab === tab.id
                                         ? "bg-primary text-white shadow-lg shadow-primary/25"
                                         : "text-gray-400 hover:text-white hover:bg-white/5"
                                 )}
                             >
-                                {col.title}
+                                <span className={clsx(
+                                    activeTab === tab.id ? "text-white" : "text-gray-500"
+                                )}>
+                                    {tab.icon}
+                                </span>
+                                {tab.title}
                             </button>
                         ))}
                     </div>
                 </div>
 
-                {/* Horizontal Kanban Board */}
-                <div className="relative overflow-x-auto pb-4 no-scrollbar">
-                    <div className="flex flex-row gap-8 min-w-full lg:justify-between">
-                        {columns.map((column) => (
-                            <div
-                                key={column.id}
-                                className={clsx(
-                                    "flex flex-col space-y-6 w-full lg:w-[calc(33.33%-1.5rem)] flex-shrink-0 transition-all duration-300",
-                                    activeTab === column.id ? "block" : "hidden lg:block"
-                                )}
-                            >
-                                {/* Column Header */}
-                                <div className="flex items-center gap-3 px-4 py-2 bg-white/5 rounded-lg border border-white/10">
-                                    <span className={clsx(
-                                        column.id === "Completed" ? "text-green-400" :
-                                            column.id === "In Progress" ? "text-blue-400" : "text-purple-400"
-                                    )}>
-                                        {column.icon}
-                                    </span>
-                                    <h2 className="font-semibold text-gray-200">{column.title}</h2>
-                                    <span className="ml-auto bg-white/10 px-2 py-0.5 rounded text-xs text-gray-400">
-                                        {projects.filter(p => p.status === column.id).length}
-                                    </span>
-                                </div>
-
-                                {/* Project Cards Stack */}
-                                <div className="flex flex-col space-y-4">
-                                    {projects
-                                        .filter((p) => p.status === column.id)
-                                        .map((project, index) => (
-                                            <motion.div
-                                                key={project.title}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                                className="glass rounded-xl overflow-hidden hover:border-primary/50 transition-all group"
-                                            >
-                                                {/* Thumbnail */}
-                                                <div className="relative aspect-video overflow-hidden">
-                                                    <img
-                                                        src={getImageUrl(project.thumbnail)}
-                                                        alt={project.title}
-                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                                    />
-                                                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        <a
-                                                            href={project.link}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform"
-                                                        >
-                                                            <Play fill="currentColor" size={20} />
-                                                        </a>
-                                                    </div>
-                                                </div>
-
-                                                {/* Content */}
-                                                <div className="p-5">
-                                                    <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                                                        {project.title}
-                                                    </h3>
-                                                    <p className="text-sm text-gray-400 mb-4 line-clamp-2 leading-relaxed">
-                                                        {project.description}
-                                                    </p>
-
-                                                    {/* Tech Stack */}
-                                                    <div className="flex flex-wrap gap-2 mb-6">
-                                                        {project.tech.map((t) => (
-                                                            <span
-                                                                key={t}
-                                                                className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 bg-white/5 rounded-md border border-white/10 text-gray-400"
-                                                            >
-                                                                {t}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-
-                                                    <a
-                                                        href={project.link}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="w-full py-2.5 rounded-lg bg-white/5 hover:bg-primary text-white text-sm font-medium transition-all flex items-center justify-center gap-2 group/btn"
-                                                    >
-                                                        <Play size={16} className="group-hover/btn:fill-current" />
-                                                        Watch Demo
-                                                        <ExternalLink size={14} className="opacity-50" />
-                                                    </a>
-                                                </div>
-                                            </motion.div>
-                                        ))}
-
-                                    {projects.filter(p => p.status === column.id).length === 0 && (
-                                        <div className="border border-dashed border-white/10 rounded-xl p-8 flex flex-col items-center justify-center text-center">
-                                            <p className="text-sm text-gray-500 italic">No projects in this stage yet.</p>
+                {/* Row-Based Layout (Grid) */}
+                <div className="relative">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        >
+                            {filteredProjects.length > 0 ? (
+                                filteredProjects.map((project, index) => (
+                                    <motion.div
+                                        key={project.title}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                                        className="glass rounded-xl overflow-hidden hover:border-primary/50 transition-all group flex flex-col h-full"
+                                    >
+                                        {/* Thumbnail Area */}
+                                        <div className="relative aspect-video overflow-hidden">
+                                            <img
+                                                src={getImageUrl(project.thumbnail)}
+                                                alt={project.title}
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <a
+                                                    href={project.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform"
+                                                >
+                                                    <Play fill="currentColor" size={20} />
+                                                </a>
+                                            </div>
                                         </div>
-                                    )}
+
+                                        {/* Project Info */}
+                                        <div className="p-5 flex flex-col flex-grow">
+                                            <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                                                {project.title}
+                                            </h3>
+                                            <p className="text-sm text-gray-400 mb-4 line-clamp-2 leading-relaxed">
+                                                {project.description}
+                                            </p>
+
+                                            {/* Tech tags */}
+                                            <div className="flex flex-wrap gap-2 mb-6">
+                                                {project.tech.map((t) => (
+                                                    <span
+                                                        key={t}
+                                                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 bg-white/5 rounded-md border border-white/10 text-gray-400"
+                                                    >
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                            </div>
+
+                                            <div className="mt-auto">
+                                                <a
+                                                    href={project.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-full py-2.5 rounded-lg bg-white/5 hover:bg-primary text-white text-sm font-medium transition-all flex items-center justify-center gap-2 group/btn"
+                                                >
+                                                    <Play size={16} className="group-hover/btn:fill-current" />
+                                                    Watch Demo
+                                                    <ExternalLink size={14} className="opacity-50" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))
+                            ) : (
+                                <div className="col-span-1 md:col-span-2 lg:col-span-3 border border-dashed border-white/10 rounded-xl p-12 flex flex-col items-center justify-center text-center">
+                                    <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4 text-gray-500">
+                                        <Code2 size={32} />
+                                    </div>
+                                    <h4 className="text-gray-300 font-medium mb-1">No Projects Found</h4>
+                                    <p className="text-sm text-gray-500 italic">No projects are currently in this category.</p>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
             </div>
         </div>
