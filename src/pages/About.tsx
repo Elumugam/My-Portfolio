@@ -34,10 +34,7 @@ export default function About() {
                     <motion.div variants={variants} className="lg:col-span-2 space-y-8">
                         <div className="glass p-8 rounded-2xl">
                             <p className="text-gray-300 leading-relaxed text-lg mb-6">
-                                I’m R Elumugam, an aspiring Data Scientist, Python Developer, Artificial Intelligence enthusiast, and Full Stack Developer with a strong interest in building intelligent, data-driven applications using AI. I’m currently pursuing a B.Tech in Artificial Intelligence and Data Science, where I’ve developed a solid foundation in programming, data analysis, machine learning, and modern web development.
-                            </p>
-                            <p className="text-gray-300 leading-relaxed text-lg">
-                                I have hands-on experience working with Python, React, Node.js, and MongoDB, and I actively use AI-powered tools and platforms like Orange Data Mining, n8n, and Google Antigravity to streamline development and automate workflows. I enjoy creating scalable, real-world solutions that combine intelligent systems with clean, user-focused design.
+                                I’m R Elumugam, a Python Developer and AI-focused Full-Stack Engineer currently pursuing a B.Tech in Artificial Intelligence and Data Science. I build scalable, data-driven applications using Python, React, Node.js, and MongoDB, with hands-on experience in AI, machine learning, and modern web development. I also leverage automation and AI-powered tools like Orange Data Mining, n8n, and Google Antigravity to streamline workflows and improve development efficiency. I enjoy creating real-world, production-ready solutions that combine intelligent systems with clean, user-focused design.
                             </p>
                         </div>
 

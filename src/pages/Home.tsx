@@ -31,8 +31,7 @@ export default function Home() {
                         Python Developer | AI & Full-Stack Engineer | Data Science
                     </h2>
                     <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                        I build scalable Python and AI-powered applications with real-world impact.<br />
-                        Experienced in Full-Stack development, data analysis, and deploying intelligent systems using modern technologies.
+                        I build scalable Python and AI-powered applications with real-world impact. Experienced in Full-Stack development, data analysis, and deploying intelligent systems using modern technologies.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
