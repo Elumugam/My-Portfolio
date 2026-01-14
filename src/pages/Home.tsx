@@ -43,7 +43,7 @@ export default function Home() {
                             Contact Me <ArrowRight size={18} />
                         </Link>
                         <a
-                            href={getImageUrl('resume.pdf')}
+                            href={getImageUrl('Elumugam_Python_Software_Developer.pdf')}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-8 py-3 rounded-full glass hover:bg-white/10 text-white font-medium transition-all flex items-center justify-center gap-2"
