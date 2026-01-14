@@ -28,10 +28,11 @@ export default function Home() {
                         Hi, I&apos;m <span className="gradient-text">R Elumugam</span>
                     </h1>
                     <h2 className="text-xl md:text-2xl text-gray-300 mb-6 font-light">
-                        Aspiring Python Developer | AI, Full-Stack Development & Data Science
+                        Python Developer | AI & Full-Stack Engineer | Data Science
                     </h2>
                     <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                        I build intelligent, data-driven applications. Passionate about Artificial Intelligence, Data Science, and creating scalable real-world solutions.
+                        I build scalable Python and AI-powered applications with real-world impact.<br />
+                        Experienced in Full-Stack development, data analysis, and deploying intelligent systems using modern technologies.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -41,6 +42,14 @@ export default function Home() {
                         >
                             Contact Me <ArrowRight size={18} />
                         </Link>
+                        <a
+                            href={getImageUrl('resume.pdf')}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-8 py-3 rounded-full glass hover:bg-white/10 text-white font-medium transition-all flex items-center justify-center gap-2"
+                        >
+                            Resume
+                        </a>
                         <Link
                             to="/about"
                             className="px-8 py-3 rounded-full glass hover:bg-white/10 text-white font-medium transition-all flex items-center justify-center gap-2"
