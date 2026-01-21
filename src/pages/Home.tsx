@@ -10,7 +10,7 @@ export default function Home() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-start pt-12 md:pt-20 min-h-[calc(100vh-5rem)] px-4 sm:px-6 overflow-hidden max-w-7xl mx-auto">
+        <div className="flex flex-col items-center justify-start pt-12 md:pt-20 min-h-[calc(100vh-5rem)] px-4 sm:px-6 max-w-7xl mx-auto">
 
             {/* Intro Tag */}
             <motion.div

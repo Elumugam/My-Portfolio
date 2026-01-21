@@ -17,6 +17,10 @@
   --radius: 1.5rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -25,7 +29,12 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 800;
   letter-spacing: -0.025em;
 }
@@ -55,7 +64,10 @@ h1, h2, h3, h4, h5, h6 {
 .gradient-border-button::before {
   content: '';
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: -1;
   margin: -2px;
   border-radius: inherit;
