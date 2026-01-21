@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Home() {
     const baseUrl = import.meta.env.BASE_URL;
