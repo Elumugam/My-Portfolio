@@ -4,6 +4,30 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  background-color: rgba(124, 58, 237, 0.1);
+  color: var(--primary);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e4e4e7;
+  border-radius: 10px;
+  border: 3px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d8;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #09090b;
@@ -17,8 +41,11 @@
   --radius: 1.5rem;
 }
 
+
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -36,7 +63,8 @@ h4,
 h5,
 h6 {
   font-weight: 800;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 }
 
 .glass {

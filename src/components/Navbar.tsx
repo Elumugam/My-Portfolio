@@ -18,31 +18,40 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-20">
+                <div className="flex items-center justify-between h-24">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                            <span className="text-white font-bold">E</span>
+                    <Link to="/" className="flex items-center gap-3 group transition-transform hover:scale-[1.02]">
+                        <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center group-hover:bg-primary transition-colors duration-500 shadow-xl shadow-gray-200">
+                            <span className="text-white font-black text-lg">E</span>
                         </div>
-                        <span className="text-xl font-extrabold tracking-tight text-gray-900">
-                            Elumugam
-                        </span>
+                        <div className="flex flex-col">
+                            <span className="text-xl font-black tracking-tight text-gray-900 leading-none">
+                                Elumugam
+                            </span>
+                            <span className="text-[10px] font-bold tracking-[0.2em] text-gray-400 mt-1 uppercase">Portfolio</span>
+                        </div>
                     </Link>
 
                     {/* Desktop Navigation - Centered */}
-                    <div className="hidden md:flex items-center space-x-10 absolute left-1/2 -translate-x-1/2">
+                    <div className="hidden lg:flex items-center space-x-12 absolute left-1/2 -translate-x-1/2">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 to={link.href}
                                 className={clsx(
-                                    "text-xs font-bold tracking-widest transition-colors hover:text-primary",
-                                    pathname === link.href ? "text-primary" : "text-gray-500"
+                                    "relative text-[11px] font-extrabold tracking-[0.2em] transition-all hover:text-primary hover:-translate-y-0.5",
+                                    pathname === link.href ? "text-primary" : "text-gray-400"
                                 )}
                             >
                                 {link.name}
+                                {pathname === link.href && (
+                                    <motion.div
+                                        layoutId="nav-active"
+                                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
+                                    />
+                                )}
                             </Link>
                         ))}
                     </div>
@@ -51,19 +60,20 @@ export default function Navbar() {
                     <div className="hidden md:block">
                         <Link
                             to="/contact"
-                            className="gradient-border-button px-6 py-2.5 text-sm font-bold flex items-center gap-2 hover:shadow-lg transition-all"
+                            className="group px-8 py-3.5 bg-gray-900 rounded-2xl text-[11px] font-black tracking-[0.2em] text-white flex items-center gap-2 hover:bg-gray-800 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300"
                         >
-                            HIRE ME <ArrowUpRight size={16} />
+                            HIRE ME
+                            <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden">
+                    <div className="lg:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-500 hover:text-gray-900 p-2"
+                            className="bg-gray-50 p-3 rounded-2xl text-gray-500 hover:text-gray-900 border border-gray-100 transition-all"
                         >
-                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                            {isOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
                     </div>
                 </div>
@@ -73,21 +83,21 @@ export default function Navbar() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="lg:hidden bg-white border-t border-gray-50 shadow-2xl overflow-hidden"
                     >
-                        <div className="px-4 pt-2 pb-6 space-y-2">
+                        <div className="px-6 py-10 space-y-4">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     to={link.href}
                                     onClick={() => setIsOpen(false)}
                                     className={clsx(
-                                        "block px-3 py-4 rounded-xl text-sm font-bold tracking-widest transition-all",
+                                        "block px-6 py-5 rounded-[1.5rem] text-sm font-black tracking-[0.15em] transition-all",
                                         pathname === link.href
-                                            ? "text-primary bg-primary/5"
+                                            ? "text-primary bg-primary/5 shadow-sm"
                                             : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
                                     )}
                                 >
@@ -97,7 +107,7 @@ export default function Navbar() {
                             <Link
                                 to="/contact"
                                 onClick={() => setIsOpen(false)}
-                                className="block w-full text-center mt-4 gradient-border-button py-4 text-sm font-bold"
+                                className="block w-full text-center mt-8 bg-gray-900 py-6 rounded-[1.5rem] text-sm font-black tracking-[0.2em] text-white shadow-xl shadow-gray-200"
                             >
                                 HIRE ME
                             </Link>
