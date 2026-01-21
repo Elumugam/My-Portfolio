@@ -1,87 +1,110 @@
 
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Linkedin, Github } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 
 export default function Home() {
-    // Safe way to get base URL in Vite
     const baseUrl = import.meta.env.BASE_URL;
-    // Ensure we don't end up with double slashes if BASE_URL ends with /
     const getImageUrl = (path: string) => {
         return `${baseUrl}${path.startsWith('/') ? path.slice(1) : path}`;
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 sm:px-6 lg:px-8 overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-7xl w-full">
-                {/* Text Content */}
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="order-2 md:order-1 text-center md:text-left"
+        <div className="flex flex-col items-center justify-start pt-12 md:pt-20 min-h-[calc(100vh-5rem)] px-4 sm:px-6 overflow-hidden max-w-7xl mx-auto">
+
+            {/* Intro Tag */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mb-8"
+            >
+                <span className="inline-block px-5 py-2 rounded-full border border-gray-200 bg-white shadow-sm text-xs font-bold tracking-widest text-primary uppercase">
+                    Hello! I am R Elumugam
+                </span>
+            </motion.div>
+
+            {/* Main Headline */}
+            <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-5xl md:text-7xl lg:text-8xl font-black text-center mb-6 tracking-tight leading-tight text-gray-900"
+            >
+                Python Developer <br className="hidden md:block" />
+                <span className="gradient-text">& AI Engineer</span>
+            </motion.h1>
+
+            {/* Sub-headline / Bio */}
+            <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg md:text-xl text-muted-foreground text-center max-w-2xl mb-12 leading-relaxed"
+            >
+                I build scalable Python and AI-powered applications with real-world impact. Example of expertise in Full-Stack development and intelligent systems.
+            </motion.p>
+
+            {/* Hero Image */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="relative w-full max-w-md aspect-[4/5] md:aspect-square mb-12 group"
+            >
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-[2rem] blur-3xl opacity-50 -z-10 group-hover:opacity-75 transition-opacity duration-500" />
+                <div className="w-full h-full rounded-[2rem] overflow-hidden border border-white/50 shadow-2xl bg-white relative">
+                    <div className="absolute inset-0 bg-gray-100/50 animate-pulse" /> {/* Placeholder while loading */}
+                    <img
+                        src={getImageUrl('images/profile-pic.jpg')}
+                        alt="R Elumugam"
+                        className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700 ease-out relative z-10"
+                    />
+                </div>
+            </motion.div>
+
+            {/* Bottom Actions */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-20"
+            >
+                {/* CV Button */}
+                <a
+                    href={getImageUrl('Elumugam_Python_Software_Developer.pdf')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative px-8 py-4 bg-white rounded-full border border-gray-200 shadow-lg shadow-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center gap-3"
                 >
-                    <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-4">
-                        Welcome to my portfolio
-                    </span>
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
-                        Hi, I&apos;m <span className="gradient-text">R Elumugam</span>
-                    </h1>
-                    <h2 className="text-xl md:text-2xl text-gray-300 mb-6 font-light">
-                        Python Developer | AI & Full-Stack Engineer | Data Science
-                    </h2>
-                    <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                        I build scalable Python and AI-powered applications with real-world impact. Experienced in Full-Stack development, data analysis, and deploying intelligent systems using modern technologies.
-                    </p>
+                    <span className="font-bold text-sm tracking-widest text-gray-900">DOWNLOAD CV</span>
+                    <ArrowUpRight size={18} className="text-primary group-hover:rotate-45 transition-transform" />
+                </a>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <Link
-                            to="/contact"
-                            className="px-8 py-3 rounded-full bg-primary hover:bg-primary/90 text-white font-medium transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] flex items-center justify-center gap-2"
-                        >
-                            Contact Me <ArrowRight size={18} />
-                        </Link>
-                        <a
-                            href={getImageUrl('Elumugam_Python_Software_Developer.pdf')}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-8 py-3 rounded-full glass hover:bg-white/10 text-white font-medium transition-all flex items-center justify-center gap-2"
-                        >
-                            Resume
-                        </a>
-                        <Link
-                            to="/about"
-                            className="px-8 py-3 rounded-full glass hover:bg-white/10 text-white font-medium transition-all flex items-center justify-center gap-2"
-                        >
-                            More About Me
-                        </Link>
-                    </div>
-
-                    <div className="mt-8 flex items-center justify-center md:justify-start gap-6 text-gray-400">
-                        <a href="https://github.com/Elumugam" target="_blank" className="hover:text-white transition-colors" aria-label="GitHub"><Github /></a>
-                        <a href="https://linkedin.com/in/elumugam-r-201b06292" target="_blank" className="hover:text-white transition-colors" aria-label="LinkedIn"><Linkedin /></a>
-                    </div>
-                </motion.div>
-
-                {/* Image Content */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                    className="order-1 md:order-2 flex justify-center"
-                >
-                    <div className="relative w-64 h-64 md:w-96 md:h-96">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full blur-2xl opacity-30 animate-pulse" />
-                        <div className="relative w-full h-full rounded-2xl overflow-hidden glass border-2 border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                            <img
-                                src={getImageUrl('images/profile-pic.jpg')}
-                                alt="R Elumugam"
-                                className="absolute inset-0 w-full h-full object-cover"
-                            />
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
+                {/* Social Links */}
+                <div className="flex items-center gap-8">
+                    <a
+                        href="https://github.com/Elumugam"
+                        target="_blank"
+                        className="text-xs font-bold tracking-widest text-gray-500 hover:text-gray-900 transition-colors uppercase"
+                    >
+                        Github
+                    </a>
+                    <a
+                        href="https://linkedin.com/in/elumugam-r-201b06292"
+                        target="_blank"
+                        className="text-xs font-bold tracking-widest text-gray-500 hover:text-gray-900 transition-colors uppercase"
+                    >
+                        LinkedIn
+                    </a>
+                    <Link
+                        to="/contact"
+                        className="text-xs font-bold tracking-widest text-gray-500 hover:text-gray-900 transition-colors uppercase"
+                    >
+                        Contact
+                    </Link>
+                </div>
+            </motion.div>
         </div>
     );
 }
