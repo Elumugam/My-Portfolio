@@ -50,49 +50,67 @@ export default function Home() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: 0.8 }}
-                        className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4"
+                        className="flex flex-wrap gap-5 justify-center lg:justify-start pt-6"
                     >
-                        {/* Download CV */}
-                        <a
-                            href={getImageUrl('Elumugam_Python_Software_Developer.pdf')}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group relative flex items-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-2xl font-black text-[11px] tracking-[0.2em] uppercase hover:bg-primary transition-all duration-500 shadow-2xl shadow-gray-200 hover:shadow-primary/30 active:scale-95"
-                        >
-                            <Download size={18} className="group-hover:animate-bounce" />
-                            DOWNLOAD CV
-                        </a>
-
-                        {/* Github */}
-                        <a
-                            href="https://github.com/Elumugam"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center gap-3 px-8 py-4 bg-white border border-gray-100 text-gray-900 rounded-2xl font-black text-[11px] tracking-[0.2em] uppercase hover:border-primary hover:text-primary transition-all duration-500 shadow-xl shadow-gray-100/50 hover:shadow-primary/10 active:scale-95"
-                        >
-                            <Github size={18} />
-                            GITHUB
-                        </a>
-
-                        {/* LinkedIn */}
-                        <a
-                            href="https://linkedin.com/in/elumugam-r-201b06292"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center gap-3 px-8 py-4 bg-white border border-gray-100 text-gray-900 rounded-2xl font-black text-[11px] tracking-[0.2em] uppercase hover:border-primary hover:text-primary transition-all duration-500 shadow-xl shadow-gray-100/50 hover:shadow-primary/10 active:scale-95"
-                        >
-                            <Linkedin size={18} />
-                            LINKEDIN
-                        </a>
-
-                        {/* Contact */}
-                        <Link
-                            to="/contact"
-                            className="group flex items-center gap-3 px-8 py-4 bg-white border border-gray-100 text-gray-900 rounded-2xl font-black text-[11px] tracking-[0.2em] uppercase hover:border-primary hover:text-primary transition-all duration-500 shadow-xl shadow-gray-100/50 hover:shadow-primary/10 active:scale-95"
-                        >
-                            <Mail size={18} />
-                            CONTACT
-                        </Link>
+                        {[
+                            {
+                                icon: Download,
+                                label: 'Download CV',
+                                href: getImageUrl('Elumugam_Python_Software_Developer.pdf'),
+                                primary: true
+                            },
+                            {
+                                icon: Github,
+                                label: 'Github',
+                                href: 'https://github.com/Elumugam'
+                            },
+                            {
+                                icon: Linkedin,
+                                label: 'LinkedIn',
+                                href: 'https://linkedin.com/in/elumugam-r-201b06292'
+                            },
+                            {
+                                icon: Mail,
+                                label: 'Contact',
+                                href: '/contact',
+                                isInternal: true
+                            }
+                        ].map((btn, index) => (
+                            <motion.div
+                                key={btn.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.7 + (index * 0.1), duration: 0.5 }}
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                {btn.isInternal ? (
+                                    <Link
+                                        to={btn.href}
+                                        className={`group flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-[11px] tracking-[0.2em] uppercase transition-all duration-300 shadow-xl ${btn.primary
+                                            ? 'bg-gray-900 text-white hover:bg-primary shadow-gray-200 hover:shadow-primary/30'
+                                            : 'bg-white border border-gray-100 text-gray-900 hover:border-primary hover:text-primary shadow-gray-100/50 hover:shadow-primary/10'
+                                            }`}
+                                    >
+                                        <btn.icon size={18} className={`transition-colors ${btn.primary ? 'group-hover:text-white' : ''}`} />
+                                        {btn.label}
+                                    </Link>
+                                ) : (
+                                    <a
+                                        href={btn.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`group flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-[11px] tracking-[0.2em] uppercase transition-all duration-300 shadow-xl ${btn.primary
+                                            ? 'bg-gray-900 text-white hover:bg-primary shadow-gray-200 hover:shadow-primary/30'
+                                            : 'bg-white border border-gray-100 text-gray-900 hover:border-primary hover:text-primary shadow-gray-100/50 hover:shadow-primary/10'
+                                            }`}
+                                    >
+                                        <btn.icon size={18} className={`transition-colors ${btn.primary ? 'group-hover:text-white' : ''}`} />
+                                        {btn.label}
+                                    </a>
+                                )}
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </motion.div>
 
@@ -114,9 +132,9 @@ export default function Home() {
                         {/* Main Image Container */}
                         <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-[12px] border-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] group">
                             <img
-                                src={getImageUrl('images/profile-pic.jpg')}
+                                src={getImageUrl('images/profile-pic-side.jpg')}
                                 alt="Elumugam"
-                                className="w-full h-full object-cover object-top scale-[1.05] group-hover:scale-110 transition-transform duration-[2s] ease-out"
+                                className="w-full h-full object-cover object-center scale-[1.05] group-hover:scale-110 transition-transform duration-[2s] ease-out"
                             />
                             {/* Overlay gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
