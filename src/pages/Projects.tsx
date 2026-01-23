@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Rocket, Code2, ExternalLink } from "lucide-react";
 import clsx from "clsx";
+import ProjectJourneyMap from "../components/ProjectJourneyMap";
 
 interface Project {
     title: string;
@@ -60,6 +61,7 @@ const tabs = [
 
 export default function Projects() {
     const [activeTab, setActiveTab] = useState("Completed");
+    const [showJourney, setShowJourney] = useState(false);
     const baseUrl = import.meta.env.BASE_URL;
 
     const getImageUrl = (path: string) => {
@@ -108,6 +110,20 @@ export default function Projects() {
                         </button>
                     ))}
                 </div>
+            </div>
+
+            {/* Journey Map Trigger */}
+            <div className="flex justify-center mb-16 -mt-8">
+                <button
+                    onClick={() => setShowJourney(true)}
+                    className="group relative px-8 py-3 bg-white text-gray-500 rounded-full text-xs font-bold tracking-widest shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] border border-gray-100 hover:border-primary/20 hover:text-primary hover:shadow-lg hover:shadow-primary/5 transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+                >
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    VIEW PROJECT JOURNEY MAP
+                </button>
             </div>
 
             {/* Grid Layout */}
@@ -206,6 +222,8 @@ export default function Projects() {
                     </motion.div>
                 </AnimatePresence>
             </div>
+
+            <ProjectJourneyMap isOpen={showJourney} onClose={() => setShowJourney(false)} />
         </div>
     );
 }
