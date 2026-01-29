@@ -31,7 +31,7 @@ export default function Home() {
                                 <span className="text-primary">Elumugam</span>
                             </h2>
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-500 tracking-tight leading-relaxed">
-                                <span className="gradient-text">Python Developer & AI Engineer</span>
+                                <span className="gradient-text">Python Developer | AI Engineer | Building Scalable Intelligent Systems</span>
                             </h1>
                         </motion.div>
 
