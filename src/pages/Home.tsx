@@ -31,7 +31,7 @@ export default function Home() {
                                 <span className="text-primary">Elumugam</span>
                             </h2>
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-500 tracking-tight leading-relaxed">
-                                <span className="gradient-text">Python Developer | AI Engineer | Building Scalable Intelligent Systems</span>
+                                <span className="gradient-text">Python Developer & AI Engineer</span>
                             </h1>
                         </motion.div>
 
@@ -41,7 +41,7 @@ export default function Home() {
                             transition={{ delay: 0.4, duration: 0.8 }}
                             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium"
                         >
-                            I architect robust Python systems and intelligent AI solutions that drive real-world impact. Currently specializing in building scalable, data-driven applications that bridge the gap between complex algorithms and seamless user experiences.
+                            I build scalable Python systems and intelligent AI solutions with real-world impact. Specialized in data-driven applications that bridge complex algorithms with seamless user experiences.
                         </motion.p>
                     </div>
 
