@@ -1,12 +1,12 @@
 const skills = [
     { category: "Core", items: ["Python", "SQL", "JavaScript", "REST APIs"] },
-    { category: "AI/ML", items: ["Machine Learning", "Scikit-learn", "Pandas", "NumPy", "Feature Engineering", "Model Evaluation", "Exploratory Data Analysis (EDA)", "Generative AI (LLMs, Prompt Engineering, RAG)", "NLP (Basics)"] },
+    { category: "AI/ML", items: ["Machine Learning", "Scikit-learn", "Pandas", "NumPy", "Feature Engineering", "Model Evaluation", "Exploratory Data Analysis (EDA)", "Generative AI (LLMs, Prompt Engineering, RAG)"] },
     { category: "Infrastructure", items: ["Git & GitHub", "Docker (Basic)", "Cloud Deployment", "MongoDB", "Relational Databases"] },
 ];
 
 export default function About() {
     return (
-        <div className="max-w-7xl mx-auto px-8 lg:px-24 py-24">
+        <div className="max-w-7xl mx-auto px-8 lg:px-24 py-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
                 <div className="lg:col-span-4">
                     <h2 className="section-label mb-8 text-white">About</h2>
@@ -20,7 +20,7 @@ export default function About() {
                     </div>
                 </div>
 
-                <div className="lg:col-span-8 space-y-24">
+                <div className="lg:col-span-8 space-y-12">
                     <p className="text-2xl text-muted font-medium leading-relaxed max-w-2xl">
                         I build scalable backend systems and production-grade AI solutions with a strong focus on performance, reliability,
                         and clean architecture. I care about systems that don’t just work — they scale, last, and create real impact.

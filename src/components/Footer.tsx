@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="border-t border-white/5 py-24 bg-black">
+        <footer className="border-t border-white/5 py-12 bg-black">
             <div className="max-w-7xl mx-auto px-8 lg:px-24">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-12">
                     <div className="space-y-8">
@@ -29,7 +29,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
                     <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
                         © {new Date().getFullYear()} R Elumugam. All rights reserved.
                     </p>

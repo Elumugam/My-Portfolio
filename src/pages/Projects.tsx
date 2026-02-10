@@ -27,7 +27,7 @@ const projects = [
 export default function Projects() {
     return (
         <div className="max-w-7xl mx-auto px-8 lg:px-24">
-            <div className="space-y-24">
+            <div className="space-y-12">
                 <div>
                     <h2 className="section-label mb-8 text-white">Selection</h2>
                     <p className="text-4xl font-bold tracking-tighter text-white">Featured Works.</p>
@@ -40,7 +40,7 @@ export default function Projects() {
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group block py-16 flex flex-col md:flex-row md:items-center justify-between gap-12 hover:px-8 transition-all duration-500 ease-in-out"
+                            className="group block py-12 flex flex-col md:flex-row md:items-center justify-between gap-12 hover:px-8 transition-all duration-500 ease-in-out"
                         >
                             <div className="space-y-2 max-w-xl">
                                 <div className="flex items-center gap-4">

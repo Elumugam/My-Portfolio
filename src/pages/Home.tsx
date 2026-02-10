@@ -94,13 +94,13 @@ export default function Home() {
 
             {/* SECTIONS */}
             < div className="relative" >
-                <section id="about" className="py-24 border-t border-white/5">
+                <section id="about" className="py-12 border-t border-white/5">
                     <About />
                 </section>
-                <section id="projects" className="py-24 border-t border-white/5">
+                <section id="projects" className="py-12 border-t border-white/5">
                     <Projects />
                 </section>
-                <section id="contact" className="py-24 border-t border-white/5">
+                <section id="contact" className="py-12 border-t border-white/5">
                     <Contact />
                 </section>
             </div >

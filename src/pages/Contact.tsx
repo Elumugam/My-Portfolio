@@ -27,7 +27,7 @@ export default function Contact() {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-8 lg:px-24 py-24">
+        <div className="max-w-7xl mx-auto px-8 lg:px-24 py-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
                 <div className="lg:col-span-5 space-y-12">
                     <div>
@@ -113,7 +113,7 @@ export default function Contact() {
             </div>
 
             {/* Technology Marquee Section */}
-            <div className="mt-32 w-full overflow-hidden border-t border-white/5 pt-16">
+            <div className="mt-16 w-full overflow-hidden border-t border-white/5 pt-16">
                 <style>
                     {`
                     @keyframes marquee {
