@@ -17,7 +17,7 @@ export default function Home() {
                         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                         className="w-full max-w-4xl flex flex-col items-center text-center space-y-12"
                     >
-                        <h1 className="text-7xl md:text-[10rem] font-bold tracking-tighter leading-[0.85] text-white">
+                        <h1 className="font-bold tracking-tighter leading-[0.85] text-white" style={{ fontSize: 'clamp(60px, 14vw, 120px)' }}>
                             <span id="word-design" className="anim-platform inline-block">Design</span> <br />
                             <span id="word-develop" className="anim-platform inline-block">Develop</span><span id="develop-dot">.</span> <br />
                             <span id="word-scale" className="text-white/10 italic anim-platform inline-block">Scale</span>
@@ -27,7 +27,7 @@ export default function Home() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8 }}
-                            className="flex items-center gap-8 mt-4 relative z-20"
+                            className="flex items-center justify-center flex-wrap gap-6 md:gap-8 mt-6 md:mt-4 relative z-20 w-full"
                         >
                             <a 
                                 href="https://www.instagram.com/_ezhumugam?igsh=NGM0bzJsdGdpN3lm&utm_source=qr" 

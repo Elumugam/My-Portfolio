@@ -45,22 +45,22 @@ export default function Navbar() {
                     {/* Left Side: Profile Area */}
                     <button 
                         onClick={() => setIsModalOpen(true)}
-                        className="flex items-center gap-3 group hover:opacity-80 transition-opacity focus:outline-none"
+                        className="flex items-center gap-2 md:gap-3 group hover:opacity-80 transition-opacity focus:outline-none"
                     >
-                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors bg-white/5 flex items-center justify-center">
+                        <div className="w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden border border-white/10 group-hover:border-white/30 transition-colors bg-white/5 flex items-center justify-center flex-shrink-0">
                             <img 
                                 src={profileHero} 
                                 alt="Profile" 
                                 className="w-full h-full object-cover object-top"
                             />
                         </div>
-                        <span className="text-xl font-bold tracking-tighter text-white">
+                        <span className="text-lg md:text-xl font-bold tracking-tighter text-white">
                             EM
                         </span>
                     </button>
 
                     {/* Right Side: Navigation */}
-                    <div className="flex gap-8 items-center">
+                    <div className="flex gap-4 sm:gap-6 md:gap-8 items-center text-sm md:text-base overflow-x-auto no-scrollbar">
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
@@ -105,7 +105,7 @@ export default function Navbar() {
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative max-w-sm w-full aspect-[3/4] md:aspect-square flex flex-col items-center justify-center"
+                            className="relative w-[85vw] max-w-[340px] md:max-w-[440px] min-h-[450px] md:h-[540px] flex flex-col items-center justify-center"
                             style={{ perspective: 1500 }}
                             onClick={(e) => e.stopPropagation()}
                         >
@@ -125,54 +125,63 @@ export default function Navbar() {
                                 >
                                     {/* Front Face */}
                                 <div 
-                                    className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-8 shadow-2xl overflow-hidden"
+                                    className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
                                     style={{ backfaceVisibility: "hidden" }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                                    <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 mb-6 bg-white/5 flex items-center justify-center flex-shrink-0 relative z-10">
+                                    <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 mb-6 bg-white/5 flex items-center justify-center flex-shrink-0 relative z-10">
                                         <img 
                                             src={profileHero} 
                                             alt="EM Profile" 
                                             className="w-full h-full object-cover object-top"
                                         />
                                     </div>
-                                    <h2 className="text-4xl font-bold tracking-tighter text-white relative z-10">EM</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-white relative z-10 mb-8 md:mb-0">EM</h2>
                                     
                                     <button 
-                                        onClick={() => setIsFlipped(true)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setIsFlipped(true);
+                                        }}
                                         className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden"
                                     >
                                         View Details
                                     </button>
                                     <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block">
-                                        Drag to view profile ➔
+                                        Click or drag to view profile ➔
                                     </p>
                                 </div>
 
                                 {/* Back Face */}
                                 <div 
-                                    className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-10 shadow-2xl overflow-hidden"
+                                    className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-6 md:p-10 shadow-2xl overflow-hidden"
                                     style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                                    <div className="text-center space-y-6 relative z-10">
-                                        <h2 className="text-3xl font-bold text-white">
+                                    <div className="text-center space-y-4 md:space-y-6 relative z-10 w-full mb-8 md:mb-0">
+                                        <h2 className="text-2xl md:text-3xl font-bold text-white">
                                             Hey Hi! 👋<br />I'm Elumugam
                                         </h2>
                                         <div className="w-12 h-[1px] bg-white/20 mx-auto" />
-                                        <p className="text-muted leading-relaxed text-lg">
-                                            Founder @TripO | Software Developer | Building AI-Powered Products &amp; Backend Systems
-                                        </p>
+                                        <div className="text-muted leading-relaxed text-sm md:text-lg flex flex-col items-center gap-1">
+                                            <span className="font-medium">Founder @TripO</span>
+                                            <span>Software Developer</span>
+                                            <span>Building AI-Powered Products &amp;</span>
+                                            <span>Backend Systems</span>
+                                        </div>
                                     </div>
                                     
                                     <button 
-                                        onClick={() => setIsFlipped(false)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setIsFlipped(false);
+                                        }}
                                         className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden"
                                     >
                                         Back
                                     </button>
                                     <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block">
-                                        &larr; Drag to return
+                                        &larr; Click or drag to return
                                     </p>
                                 </div>
                             </motion.div>
