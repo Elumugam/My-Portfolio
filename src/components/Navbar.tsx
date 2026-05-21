@@ -136,7 +136,7 @@ export default function Navbar() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-12"
+                        className="profile-modal fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md md:p-12"
                         onClick={() => {
                             setIsModalOpen(false);
                             // reset flip state on close after a small delay
@@ -159,7 +159,7 @@ export default function Navbar() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl m-0 z-[9999]"
+                            className="profile-card fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl m-0 z-[9999]"
                             style={{ 
                                 perspective: 1500, WebkitPerspective: 1500,
                                 maxWidth: "min(320px, calc(100vw - 32px))"
@@ -177,7 +177,7 @@ export default function Navbar() {
                                 >
                                     {/* Front Face */}
                                 <div 
-                                    className="absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
+                                    className="front-side absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
                                     style={{ 
                                         backgroundColor: "rgba(15,15,15,0.95)", 
                                         backdropFilter: "blur(15px)", 
@@ -189,7 +189,7 @@ export default function Navbar() {
                                     }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                                    <div className="w-[100px] h-[100px] md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 mb-6 bg-white/5 flex items-center justify-center flex-shrink-0 relative z-10">
+                                    <div className="w-[100px] h-[100px] md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 mb-4 bg-white/5 flex items-center justify-center flex-shrink-0 relative z-10">
                                         <img 
                                             src={profileHero} 
                                             alt="EM Profile" 
@@ -217,7 +217,7 @@ export default function Navbar() {
 
                                 {/* Back Face */}
                                 <div 
-                                    className="absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-10 shadow-2xl overflow-hidden"
+                                    className="back-side absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-10 shadow-2xl overflow-hidden"
                                     style={{ 
                                         backgroundColor: "rgba(15,15,15,0.95)", 
                                         backdropFilter: "blur(15px)", 
