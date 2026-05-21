@@ -98,8 +98,9 @@ export default function Navbar() {
                             initial={{ x: "100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
-                            transition={{ type: "tween", duration: 0.3 }}
-                            className="absolute top-0 right-0 bottom-0 w-64 bg-[#0a0a0a] border-l border-white/10 shadow-2xl flex flex-col p-8"
+                            transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
+                            className="absolute top-0 right-0 bottom-0 w-[70vw] border-l border-white/10 shadow-2xl flex flex-col"
+                            style={{ backgroundColor: "rgba(0,0,0,0.95)", backdropFilter: "blur(10px)", padding: "30px" }}
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button 
@@ -158,7 +159,7 @@ export default function Navbar() {
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-[90vw] max-w-[340px] md:max-w-[460px] min-h-[480px] h-auto md:h-[580px] flex flex-col items-center justify-center"
+                            className="relative w-[90vw] max-w-[330px] md:max-w-[460px] min-h-[460px] h-auto md:h-[580px] flex flex-col items-center justify-center"
                             style={{ perspective: 1500, WebkitPerspective: 1500 }}
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -173,11 +174,17 @@ export default function Navbar() {
                                 >
                                     {/* Front Face */}
                                 <div 
-                                    className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
-                                    style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                                    className="absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
+                                    style={{ 
+                                        backgroundColor: "rgba(15,15,15,0.95)", 
+                                        backdropFilter: "blur(15px)", 
+                                        WebkitBackdropFilter: "blur(15px)", 
+                                        backfaceVisibility: "hidden", 
+                                        WebkitBackfaceVisibility: "hidden" 
+                                    }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                                    <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 mb-6 bg-white/5 flex items-center justify-center flex-shrink-0 relative z-10">
+                                    <div className="w-[100px] h-[100px] md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 mb-6 bg-white/5 flex items-center justify-center flex-shrink-0 relative z-10">
                                         <img 
                                             src={profileHero} 
                                             alt="EM Profile" 
@@ -195,6 +202,9 @@ export default function Navbar() {
                                     >
                                         View Details
                                     </button>
+                                    <p className="text-white/50 mt-4 text-xs uppercase tracking-widest relative z-20 md:hidden">
+                                        Tap to view profile
+                                    </p>
                                     <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block">
                                         Click or drag to view profile ➔
                                     </p>
@@ -202,8 +212,16 @@ export default function Navbar() {
 
                                 {/* Back Face */}
                                 <div 
-                                    className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-6 md:p-10 shadow-2xl overflow-hidden"
-                                    style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)", WebkitTransform: "rotateY(180deg)" }}
+                                    className="absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-10 shadow-2xl overflow-hidden"
+                                    style={{ 
+                                        backgroundColor: "rgba(15,15,15,0.95)", 
+                                        backdropFilter: "blur(15px)", 
+                                        WebkitBackdropFilter: "blur(15px)", 
+                                        backfaceVisibility: "hidden", 
+                                        WebkitBackfaceVisibility: "hidden", 
+                                        transform: "rotateY(180deg)", 
+                                        WebkitTransform: "rotateY(180deg)" 
+                                    }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
                                     <div className="text-center flex flex-col items-center justify-center relative z-10 w-full mb-8 md:mb-0" style={{ lineHeight: 1.6 }}>
@@ -228,6 +246,9 @@ export default function Navbar() {
                                     >
                                         Back
                                     </button>
+                                    <p className="text-white/50 mt-4 text-xs uppercase tracking-widest relative z-20 md:hidden">
+                                        Tap to return
+                                    </p>
                                     <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block">
                                         &larr; Click or drag to return
                                     </p>
