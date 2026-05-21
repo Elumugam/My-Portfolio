@@ -16,8 +16,10 @@ export default function Footer() {
                         <div className="space-y-6">
                             <h4 className="section-label text-white/50">Social</h4>
                             <div className="flex flex-col gap-4">
-                                <a href="https://github.com/Elumugam" className="nav-link normal-case tracking-normal">GitHub</a>
-                                <a href="https://linkedin.com/in/elumugam-r-201b06292" className="nav-link normal-case tracking-normal">LinkedIn</a>
+                                <a href="https://www.instagram.com/_ezhumugam?igsh=NGM0bzJsdGdpN3lm&utm_source=qr" target="_blank" rel="noreferrer" className="nav-link normal-case tracking-normal">Instagram</a>
+                                <a href="https://www.facebook.com/share/1CBTK16MsN/?mibextid=wwXIfr" target="_blank" rel="noreferrer" className="nav-link normal-case tracking-normal">Facebook</a>
+                                <a href="https://www.linkedin.com/in/elumugam-r-201b06292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noreferrer" className="nav-link normal-case tracking-normal">LinkedIn</a>
+                                <a href="https://github.com/Elumugam" target="_blank" rel="noreferrer" className="nav-link normal-case tracking-normal">GitHub</a>
                             </div>
                         </div>
                         <div className="space-y-6">
