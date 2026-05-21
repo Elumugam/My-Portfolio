@@ -38,9 +38,9 @@ export default function Navbar() {
         <>
             <nav className={clsx(
                 "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
-                scrolled ? "py-4 bg-black/80 backdrop-blur-sm" : "py-8 bg-transparent"
+                scrolled ? "py-4 bg-black/80 backdrop-blur-sm" : "py-4 md:py-8 bg-transparent"
             )}>
-                <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center w-full">
                     
                     {/* Left Side: Profile Area */}
                     <button 
@@ -60,7 +60,7 @@ export default function Navbar() {
                     </button>
 
                     {/* Right Side: Navigation */}
-                    <div className="flex gap-4 sm:gap-6 md:gap-8 items-center text-sm md:text-base overflow-x-auto no-scrollbar">
+                    <div className="flex items-center text-[12px] sm:text-sm md:text-base overflow-x-auto no-scrollbar" style={{ gap: 'clamp(10px, 2vw, 24px)' }}>
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
@@ -106,7 +106,7 @@ export default function Navbar() {
                             exit={{ scale: 0.9, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
                             className="relative w-[85vw] max-w-[340px] md:max-w-[440px] min-h-[450px] md:h-[540px] flex flex-col items-center justify-center"
-                            style={{ perspective: 1500 }}
+                            style={{ perspective: 1500, WebkitPerspective: 1500 }}
                             onClick={(e) => e.stopPropagation()}
                         >
                                 <motion.div
@@ -120,13 +120,13 @@ export default function Navbar() {
                                     onClick={() => setIsFlipped(!isFlipped)}
                                     animate={{ rotateY: isFlipped ? 180 : 0 }}
                                     transition={{ duration: 0.7, type: "spring", stiffness: 150, damping: 20 }}
-                                    style={{ transformStyle: "preserve-3d" }}
+                                    style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
                                     className="w-full h-full relative cursor-grab active:cursor-grabbing md:cursor-pointer"
                                 >
                                     {/* Front Face */}
                                 <div 
                                     className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
-                                    style={{ backfaceVisibility: "hidden" }}
+                                    style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
                                     <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 mb-6 bg-white/5 flex items-center justify-center flex-shrink-0 relative z-10">
@@ -155,7 +155,7 @@ export default function Navbar() {
                                 {/* Back Face */}
                                 <div 
                                     className="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/10 flex flex-col items-center justify-center p-6 md:p-10 shadow-2xl overflow-hidden"
-                                    style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+                                    style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)", WebkitTransform: "rotateY(180deg)" }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
                                     <div className="text-center space-y-4 md:space-y-6 relative z-10 w-full mb-8 md:mb-0">
