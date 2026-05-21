@@ -159,8 +159,11 @@ export default function Navbar() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] max-w-[320px] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl"
-                            style={{ perspective: 1500, WebkitPerspective: 1500 }}
+                            className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl m-0 z-[9999]"
+                            style={{ 
+                                perspective: 1500, WebkitPerspective: 1500,
+                                maxWidth: "min(320px, calc(100vw - 32px))"
+                            }}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setIsFlipped(!isFlipped);
