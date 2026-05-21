@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Menu } from "lucide-react";
 import profileHero from "../assets/profile-hero.png";
 
 const navLinks = [
@@ -13,6 +13,7 @@ const navLinks = [
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
 
@@ -59,8 +60,8 @@ export default function Navbar() {
                         </span>
                     </button>
 
-                    {/* Right Side: Navigation */}
-                    <div className="flex items-center text-[12px] sm:text-sm md:text-base overflow-x-auto no-scrollbar" style={{ gap: 'clamp(10px, 2vw, 24px)' }}>
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex gap-8 items-center text-base">
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
@@ -72,8 +73,60 @@ export default function Navbar() {
                             </a>
                         ))}
                     </div>
+
+                    {/* Mobile Hamburger Icon */}
+                    <button 
+                        className="md:hidden text-white focus:outline-none p-2 hover:opacity-80 transition-opacity"
+                        onClick={() => setIsMobileMenuOpen(true)}
+                    >
+                        <Menu size={28} />
+                    </button>
                 </div>
             </nav>
+
+            {/* Mobile Hamburger Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm md:hidden"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                        <motion.div 
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "tween", duration: 0.3 }}
+                            className="absolute top-0 right-0 bottom-0 w-64 bg-[#0a0a0a] border-l border-white/10 shadow-2xl flex flex-col p-8"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button 
+                                className="self-end text-white/50 hover:text-white mb-12 focus:outline-none"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                <X size={32} />
+                            </button>
+                            <div className="flex flex-col gap-8">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        onClick={(e) => {
+                                            setIsMobileMenuOpen(false);
+                                            handleNavClick(e, link.href);
+                                        }}
+                                        className="text-lg font-medium text-white/80 hover:text-white tracking-widest uppercase transition-colors"
+                                    >
+                                        {link.name}
+                                    </a>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Profile Image Modal (Interactive Flip Card) */}
             <AnimatePresence>
@@ -105,23 +158,18 @@ export default function Navbar() {
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-[85vw] max-w-[340px] md:max-w-[440px] min-h-[450px] md:h-[540px] flex flex-col items-center justify-center"
+                            className="relative w-[90vw] max-w-[340px] md:max-w-[460px] min-h-[480px] h-auto md:h-[580px] flex flex-col items-center justify-center"
                             style={{ perspective: 1500, WebkitPerspective: 1500 }}
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsFlipped(!isFlipped);
+                            }}
                         >
                                 <motion.div
-                                    drag="x"
-                                    dragConstraints={{ left: 0, right: 0 }}
-                                    dragElastic={0.2}
-                                    onDragEnd={(e, { offset }) => {
-                                        if (offset.x < -50) setIsFlipped(true); // swipe left
-                                        else if (offset.x > 50) setIsFlipped(false); // swipe right
-                                    }}
-                                    onClick={() => setIsFlipped(!isFlipped)}
                                     animate={{ rotateY: isFlipped ? 180 : 0 }}
-                                    transition={{ duration: 0.7, type: "spring", stiffness: 150, damping: 20 }}
+                                    transition={{ duration: 0.7, ease: "easeInOut" }}
                                     style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
-                                    className="w-full h-full relative cursor-grab active:cursor-grabbing md:cursor-pointer"
+                                    className="w-full h-full relative cursor-pointer"
                                 >
                                     {/* Front Face */}
                                 <div 
@@ -158,15 +206,15 @@ export default function Navbar() {
                                     style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg)", WebkitTransform: "rotateY(180deg)" }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                                    <div className="text-center space-y-4 md:space-y-6 relative z-10 w-full mb-8 md:mb-0">
-                                        <h2 className="text-2xl md:text-3xl font-bold text-white">
+                                    <div className="text-center flex flex-col items-center justify-center relative z-10 w-full mb-8 md:mb-0" style={{ lineHeight: 1.6 }}>
+                                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                                             Hey Hi! 👋<br />I'm Elumugam
                                         </h2>
-                                        <div className="w-12 h-[1px] bg-white/20 mx-auto" />
-                                        <div className="text-muted leading-relaxed text-sm md:text-lg flex flex-col items-center gap-1">
-                                            <span className="font-medium">Founder @TripO</span>
+                                        <div className="w-12 h-[1px] bg-white/20 mx-auto mb-4" />
+                                        <div className="text-muted text-sm md:text-lg flex flex-col items-center gap-1">
+                                            <span className="font-medium text-white/90">Founder @TripO</span>
                                             <span>Software Developer</span>
-                                            <span>Building AI-Powered Products &amp;</span>
+                                            <span className="mt-2">Building AI-Powered Products &amp;</span>
                                             <span>Backend Systems</span>
                                         </div>
                                     </div>
