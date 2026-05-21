@@ -155,11 +155,11 @@ export default function Navbar() {
                         </button>
                         
                         <motion.div 
-                            initial={{ scale: 0.9, y: 20 }}
-                            animate={{ scale: 1, y: 0 }}
-                            exit={{ scale: 0.9, y: 20 }}
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-[90vw] max-w-[330px] md:max-w-[460px] min-h-[460px] h-auto md:h-[580px] flex flex-col items-center justify-center"
+                            className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] max-w-[320px] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl"
                             style={{ perspective: 1500, WebkitPerspective: 1500 }}
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -170,7 +170,7 @@ export default function Navbar() {
                                     animate={{ rotateY: isFlipped ? 180 : 0 }}
                                     transition={{ duration: 0.7, ease: "easeInOut" }}
                                     style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
-                                    className="w-full h-full relative cursor-pointer"
+                                    className="w-full h-full absolute inset-0 cursor-pointer"
                                 >
                                     {/* Front Face */}
                                 <div 
@@ -180,7 +180,9 @@ export default function Navbar() {
                                         backdropFilter: "blur(15px)", 
                                         WebkitBackdropFilter: "blur(15px)", 
                                         backfaceVisibility: "hidden", 
-                                        WebkitBackfaceVisibility: "hidden" 
+                                        WebkitBackfaceVisibility: "hidden",
+                                        transform: "rotateY(0deg)",
+                                        WebkitTransform: "rotateY(0deg)"
                                     }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
@@ -191,21 +193,21 @@ export default function Navbar() {
                                             className="w-full h-full object-cover object-top"
                                         />
                                     </div>
-                                    <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-white relative z-10 mb-8 md:mb-0">EM</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-white relative z-10 mb-2 md:mb-0">EM</h2>
                                     
                                     <button 
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             setIsFlipped(true);
                                         }}
-                                        className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden"
+                                        className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden pointer-events-none"
                                     >
                                         View Details
                                     </button>
-                                    <p className="text-white/50 mt-4 text-xs uppercase tracking-widest relative z-20 md:hidden">
+                                    <p className="text-white/50 mt-4 text-xs uppercase tracking-widest relative z-20 md:hidden pointer-events-none">
                                         Tap to view profile
                                     </p>
-                                    <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block">
+                                    <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block pointer-events-none">
                                         Click or drag to view profile ➔
                                     </p>
                                 </div>
@@ -242,14 +244,14 @@ export default function Navbar() {
                                             e.stopPropagation();
                                             setIsFlipped(false);
                                         }}
-                                        className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden"
+                                        className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden pointer-events-none"
                                     >
                                         Back
                                     </button>
-                                    <p className="text-white/50 mt-4 text-xs uppercase tracking-widest relative z-20 md:hidden">
+                                    <p className="text-white/50 mt-4 text-xs uppercase tracking-widest relative z-20 md:hidden pointer-events-none">
                                         Tap to return
                                     </p>
-                                    <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block">
+                                    <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block pointer-events-none">
                                         &larr; Click or drag to return
                                     </p>
                                 </div>
