@@ -6,7 +6,7 @@ import Projects from "./Projects";
 import Contact from "./Contact";
 import TripO from "./TripO";
 
-const words = ["Create.", "Build.", "Innovate.", "Launch.", "Transform."];
+const words = ["Develop.", "Create.", "Build.", "Innovate.", "Launch.", "Transform."];
 
 export default function Home() {
     const [currentWord, setCurrentWord] = useState(0);
