@@ -1,11 +1,24 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDown, Instagram, Facebook, Linkedin } from "lucide-react";
 import About from "./About";
 import Projects from "./Projects";
 import Contact from "./Contact";
 import TripO from "./TripO";
 
+const heroWords = ["Create.", "Build.", "Innovate.", "Launch.", "Transform."];
+
 export default function Home() {
+    const [currentHeroWord, setCurrentHeroWord] = useState(0);
+
+    useEffect(() => {
+        const interval = window.setInterval(() => {
+            setCurrentHeroWord((index) => (index + 1) % heroWords.length);
+        }, 1700);
+
+        return () => window.clearInterval(interval);
+    }, []);
+
     return (
         <div className="flex flex-col w-full bg-black noise-bg relative">
             {/* HERO SECTION */}
@@ -19,7 +32,24 @@ export default function Home() {
                     >
                         <h1 className="font-bold tracking-tighter leading-[0.85] text-white" style={{ fontSize: 'clamp(60px, 14vw, 120px)' }}>
                             <span id="word-design" className="anim-platform inline-block">Design</span> <br />
-                            <span id="word-develop" className="anim-platform inline-block">Develop</span><span id="develop-dot">.</span> <br />
+                            <span
+                                id="word-develop"
+                                className="anim-platform inline-grid align-baseline overflow-hidden"
+                                style={{ width: '10.5ch', gridTemplateAreas: '"stack"' }}
+                            >
+                                <AnimatePresence mode="wait" initial={false}>
+                                    <motion.span
+                                        key={heroWords[currentHeroWord]}
+                                        className="col-start-1 row-start-1"
+                                        initial={{ opacity: 0, y: 18 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -18 }}
+                                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                                    >
+                                        {heroWords[currentHeroWord]}
+                                    </motion.span>
+                                </AnimatePresence>
+                            </span> <br />
                             <span id="word-scale" className="text-white/10 italic anim-platform inline-block">Scale</span>
                         </h1>
 
