@@ -159,10 +159,9 @@ export default function Navbar() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="profile-card fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[90vw] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl m-0 z-[9999]"
+                            className="profile-card w-[90vw] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl m-0 z-[9999]"
                             style={{ 
-                                perspective: 1500, WebkitPerspective: 1500,
-                                maxWidth: "min(320px, calc(100vw - 32px))"
+                                perspective: 1500, WebkitPerspective: 1500
                             }}
                             onClick={(e) => {
                                 e.stopPropagation();
