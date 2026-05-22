@@ -6,17 +6,17 @@ import Projects from "./Projects";
 import Contact from "./Contact";
 import TripO from "./TripO";
 
-const heroWords = ["Create.", "Build.", "Innovate.", "Launch.", "Transform."];
+const words = ["Create.", "Build.", "Innovate.", "Launch.", "Transform."];
 
 export default function Home() {
-    const [currentHeroWord, setCurrentHeroWord] = useState(0);
+    const [currentWord, setCurrentWord] = useState(0);
 
     useEffect(() => {
-        const interval = window.setInterval(() => {
-            setCurrentHeroWord((index) => (index + 1) % heroWords.length);
-        }, 1700);
+        const interval = setInterval(() => {
+            setCurrentWord((prev) => (prev + 1) % words.length);
+        }, 1800);
 
-        return () => window.clearInterval(interval);
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -34,19 +34,19 @@ export default function Home() {
                             <span id="word-design" className="anim-platform inline-block">Design</span> <br />
                             <span
                                 id="word-develop"
-                                className="anim-platform inline-grid align-baseline overflow-hidden"
-                                style={{ width: '10.5ch', gridTemplateAreas: '"stack"' }}
+                                className="anim-platform relative inline-block align-baseline overflow-hidden whitespace-nowrap"
+                                style={{ width: '10.5ch', minHeight: '1em' }}
                             >
                                 <AnimatePresence mode="wait" initial={false}>
                                     <motion.span
-                                        key={heroWords[currentHeroWord]}
-                                        className="col-start-1 row-start-1"
+                                        key={words[currentWord]}
+                                        className="absolute inset-0 block"
                                         initial={{ opacity: 0, y: 18 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -18 }}
-                                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                                        transition={{ duration: 0.6, ease: "easeInOut" }}
                                     >
-                                        {heroWords[currentHeroWord]}
+                                        {words[currentWord]}
                                     </motion.span>
                                 </AnimatePresence>
                             </span> <br />
