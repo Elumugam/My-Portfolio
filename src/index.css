@@ -256,65 +256,17 @@ h3 {
 }
 
 
-/* Character Animations */
-.character-svg {
-  transform-origin: center bottom;
-  will-change: transform;
-}
-.char-body-group { transform-origin: center center; }
-.char-leg { transform-origin: top center; }
-.char-tail { transform-origin: left bottom; }
-.char-wing { transform-origin: center center; }
-.char-wheel { transform-origin: center center; }
-
-/* Walk */
-.anim-walk .leg-1 { animation: walk-leg 0.6s infinite linear; }
-.anim-walk .leg-2 { animation: walk-leg 0.6s infinite linear reverse; }
-.anim-walk .leg-3 { animation: walk-leg 0.6s infinite linear 0.3s; }
-.anim-walk .leg-4 { animation: walk-leg 0.6s infinite linear reverse 0.3s; }
-.anim-walk .char-body-group { animation: walk-body 0.3s infinite alternate ease-in-out; }
-.anim-walk .char-wheel { animation: spin-wheel 1s infinite linear; }
-
-/* Run */
-.anim-run .leg-1 { animation: walk-leg 0.3s infinite linear; }
-.anim-run .leg-2 { animation: walk-leg 0.3s infinite linear reverse; }
-.anim-run .leg-3 { animation: walk-leg 0.3s infinite linear 0.15s; }
-.anim-run .leg-4 { animation: walk-leg 0.3s infinite linear reverse 0.15s; }
-.anim-run .char-body-group { animation: run-body 0.15s infinite alternate ease-in-out; }
-.anim-run .char-wing { animation: flap-wing 0.2s infinite alternate ease-in-out; }
-.anim-run .char-wheel { animation: spin-wheel 0.5s infinite linear; }
-
-/* Jump */
-.anim-jump .char-body-group { transform: translateY(-10px) scaleY(1.1); transition: transform 0.3s cubic-bezier(0.2, 1.2, 0.8, 1); }
-.anim-jump .char-leg { transform: rotate(-30deg); transition: transform 0.3s; }
-.anim-jump .char-wing { transform: rotate(-45deg); transition: transform 0.3s; }
-
-/* Sit */
-.anim-sit .char-body-group { transform: translateY(10px); transition: transform 0.3s; }
-.anim-sit .leg-1, .anim-sit .leg-2 { transform: rotate(-90deg); transition: transform 0.3s; }
-.anim-sit .leg-3, .anim-sit .leg-4 { transform: rotate(90deg); transition: transform 0.3s; }
-.anim-sit .char-tail { transform: rotate(45deg); transition: transform 0.3s; }
-
-@keyframes walk-leg {
-  0% { transform: rotate(-25deg); }
-  50% { transform: rotate(25deg); }
-  100% { transform: rotate(-25deg); }
-}
-@keyframes walk-body {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-3px); }
-}
-@keyframes run-body {
-  0% { transform: translateY(0) scaleX(1.05); }
-  100% { transform: translateY(-5px) scaleX(0.95); }
-}
-@keyframes flap-wing {
-  0% { transform: rotate(-20deg); }
-  100% { transform: rotate(20deg); }
-}
-@keyframes spin-wheel {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.profile-card .profile-card-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  gap: 18px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 
@@ -413,7 +365,8 @@ body {
   }
 
   .profile-card * {
-    position: relative;
+    position: relative !important;
+    transform: none !important;
     max-width: 100%;
     box-sizing: border-box;
   }

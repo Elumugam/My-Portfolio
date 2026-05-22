@@ -216,7 +216,7 @@ export default function Navbar() {
 
                                 {/* Back Face */}
                                 <div 
-                                    className="back-side absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-10 shadow-2xl overflow-hidden"
+                                    className="back-side profile-card-back absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 p-6 md:p-10 shadow-2xl overflow-hidden"
                                     style={{ 
                                         backgroundColor: "rgba(15,15,15,0.95)", 
                                         backdropFilter: "blur(15px)", 
@@ -228,34 +228,18 @@ export default function Navbar() {
                                     }}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                                    <div className="text-center flex flex-col items-center justify-center relative z-10 w-full mb-8 md:mb-0" style={{ lineHeight: 1.6 }}>
-                                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                                    <div className="relative z-10 w-full flex flex-col items-center justify-center text-center gap-4 md:gap-[18px]" style={{ lineHeight: 1.3 }}>
+                                        <h2 className="text-[clamp(24px,2vw,42px)] font-bold text-white mb-0">
                                             Hey Hi! 👋<br />I'm Elumugam
                                         </h2>
-                                        <div className="w-12 h-[1px] bg-white/20 mx-auto mb-4" />
-                                        <div className="text-muted text-sm md:text-lg flex flex-col items-center gap-1">
+                                        <div className="w-12 h-[1px] bg-white/20 mx-auto" />
+                                        <div className="text-muted text-sm md:text-lg flex flex-col items-center gap-2 md:gap-3">
                                             <span className="font-medium text-white/90">Founder @TripO</span>
                                             <span>Software Developer</span>
                                             <span className="mt-2">Building AI-Powered Products &amp;</span>
                                             <span>Backend Systems</span>
                                         </div>
                                     </div>
-                                    
-                                    <button 
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setIsFlipped(false);
-                                        }}
-                                        className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden pointer-events-none"
-                                    >
-                                        Back
-                                    </button>
-                                    <p className="text-white/50 mt-4 text-xs uppercase tracking-widest relative z-20 md:hidden pointer-events-none">
-                                        Tap to return
-                                    </p>
-                                    <p className="text-white/40 mt-2 text-xs uppercase tracking-widest absolute bottom-8 opacity-50 hidden md:block pointer-events-none">
-                                        &larr; Click or drag to return
-                                    </p>
                                 </div>
                             </motion.div>
                         </motion.div>
