@@ -324,6 +324,10 @@ body {
 }
 
 @media (min-width: 769px) {
+  .profile-card-container {
+    perspective: 1200px;
+  }
+
   .profile-modal {
     position: fixed !important;
     top: 0 !important;
@@ -362,16 +366,43 @@ body {
     align-items: center !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
+    transform-style: preserve-3d !important;
+    transition: transform .8s ease !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 9999 !important;
   }
 
-  .profile-card * {
+  .profile-card.flipped {
+    transform: rotateY(180deg) !important;
+  }
+
+  .profile-front,
+  .profile-back {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .profile-back {
+    transform: rotateY(180deg) !important;
+  }
+
+  .profile-card-back > * {
     position: relative !important;
     transform: none !important;
     max-width: 100%;
     box-sizing: border-box;
   }
 
-  .profile-card img {
+  .profile-card-back img {
     position: relative !important;
     top: 0 !important;
     left: 0 !important;

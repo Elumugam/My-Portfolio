@@ -159,10 +159,7 @@ export default function Navbar() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="profile-card w-[90vw] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl m-0 z-[9999]"
-                            style={{ 
-                                perspective: 1500, WebkitPerspective: 1500
-                            }}
+                            className="profile-card-container profile-card w-[90vw] md:max-w-[460px] min-h-[420px] h-auto md:h-[580px] rounded-[24px] md:rounded-3xl m-0 z-[9999]"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setIsFlipped(!isFlipped);
@@ -176,7 +173,7 @@ export default function Navbar() {
                                 >
                                     {/* Front Face */}
                                 <div 
-                                    className="front-side absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
+                                    className="profile-front front-side absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-6 md:p-8 shadow-2xl overflow-hidden"
                                     style={{ 
                                         backgroundColor: "rgba(15,15,15,0.95)", 
                                         backdropFilter: "blur(15px)", 
@@ -198,10 +195,6 @@ export default function Navbar() {
                                     <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-white relative z-10 mb-2 md:mb-0">EM</h2>
                                     
                                     <button 
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setIsFlipped(true);
-                                        }}
                                         className="absolute bottom-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all z-20 md:hidden pointer-events-none"
                                     >
                                         View Details
@@ -216,7 +209,7 @@ export default function Navbar() {
 
                                 {/* Back Face */}
                                 <div 
-                                    className="back-side profile-card-back absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 p-6 md:p-10 shadow-2xl overflow-hidden"
+                                    className="profile-back back-side profile-card-back absolute inset-0 rounded-[24px] md:rounded-3xl border border-white/10 p-6 md:p-10 shadow-2xl overflow-hidden"
                                     style={{ 
                                         backgroundColor: "rgba(15,15,15,0.95)", 
                                         backdropFilter: "blur(15px)", 
