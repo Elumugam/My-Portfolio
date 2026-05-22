@@ -41,7 +41,7 @@ export default function Home() {
                                     <motion.span
                                         key={words[currentWord]}
                                         className="absolute inset-0 block"
-                                        initial={{ opacity: 0, y: 18 }}
+                                        initial={currentWord === 0 ? false : { opacity: 0, y: 18 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -18 }}
                                         transition={{ duration: 0.6, ease: "easeInOut" }}
