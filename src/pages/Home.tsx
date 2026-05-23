@@ -22,7 +22,7 @@ export default function Home() {
     return (
         <div className="flex flex-col w-full bg-black noise-bg relative">
             {/* HERO SECTION */}
-            <section id="hero" className="relative min-h-screen flex flex-col justify-center px-8 lg:px-24 overflow-hidden">
+            <section id="hero" className="hero relative min-h-screen flex flex-col justify-center px-8 lg:px-24 overflow-hidden">
                 <div className="max-w-7xl mx-auto w-full flex justify-center items-center z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}

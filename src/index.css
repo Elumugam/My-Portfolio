@@ -255,6 +255,15 @@ h3 {
   transform: scale(0.95);
 }
 
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-flight {
+  display: none;
+}
+
 
 .profile-card .profile-card-back {
   display: flex;
