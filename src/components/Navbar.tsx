@@ -77,7 +77,7 @@ export default function Navbar() {
         <>
             <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4 md:pt-6 pointer-events-none">
                 <nav className={clsx(
-                    "max-w-6xl mx-auto w-full pointer-events-auto rounded-full transition-all duration-500 border border-white/10 px-6 py-3 md:py-3.5 flex items-center justify-between shadow-2xl",
+                    "max-w-6xl mx-auto w-full pointer-events-auto rounded-full transition-all duration-500 border border-white/10 px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between shadow-2xl",
                     scrolled ? "bg-black/80 backdrop-blur-xl border-white/15" : "bg-black/40 backdrop-blur-md"
                 )}>
                     {/* Logo on Left */}

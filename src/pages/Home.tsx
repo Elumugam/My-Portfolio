@@ -121,12 +121,19 @@ export default function Home() {
             setConnectAnnouncement(portfolioStore.getSectionAnnouncement("connect"));
         };
 
+        const handleGlobalUpdate = () => {
+            handleHeroUpdate();
+            handleAnnouncementUpdate();
+        };
+
         window.addEventListener("portfolio-hero-updated", handleHeroUpdate);
         window.addEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
+        window.addEventListener("storage", handleGlobalUpdate);
         return () => {
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("portfolio-hero-updated", handleHeroUpdate);
             window.removeEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
+            window.removeEventListener("storage", handleGlobalUpdate);
         };
     }, []);
 

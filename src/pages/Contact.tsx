@@ -28,21 +28,21 @@ export default function Contact() {
     };
 
     return (
-        <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
-                <Reveal className="lg:col-span-5 space-y-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 py-6 sm:py-10 lg:py-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
+                <Reveal className="lg:col-span-5 space-y-6 sm:space-y-8">
                     <div>
-                        <h2 className="section-label mb-8 text-white">Contact</h2>
-                        <p className="text-6xl font-bold tracking-tighter text-white">Let's connect.</p>
+                        <h2 className="section-label mb-4 sm:mb-6 text-white">Contact</h2>
+                        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white">Let's connect.</p>
                     </div>
 
-                    <div className="space-y-8">
-                        <p className="text-xl text-muted font-medium leading-relaxed">
+                    <div className="space-y-6">
+                        <p className="text-base sm:text-lg md:text-xl text-muted font-medium leading-relaxed">
                             Actively looking for entry-level Python and AI engineering roles.
                         </p>
 
-                        <div className="space-y-4">
-                            <a href="mailto:elumugam.dev@gmail.com" className="block text-2xl font-bold text-white hover:text-muted transition-colors">
+                        <div className="space-y-3">
+                            <a href="mailto:elumugam.dev@gmail.com" className="block text-lg sm:text-xl md:text-2xl font-bold text-white hover:text-muted transition-colors">
                                 elumugam.dev@gmail.com
                             </a>
                             <p className="text-muted text-[10px] font-bold tracking-widest uppercase">Coimbatore, India</p>
@@ -52,8 +52,8 @@ export default function Contact() {
 
                 <div className="lg:col-span-7">
                     <Reveal delay={0.15}>
-                    <form ref={form} onSubmit={handleSubmit} className="space-y-12">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <form ref={form} onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                             <div className="space-y-4 border-b border-white/10 pb-4 focus-within:border-white transition-colors">
                                 <label className="text-[10px] font-bold text-muted uppercase tracking-widest">Name</label>
                                 <input

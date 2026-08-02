@@ -2,19 +2,19 @@ import Reveal from "./Reveal";
 
 export default function Footer() {
     return (
-        <footer className="border-t border-white/5 py-12 bg-black">
-            <div className="max-w-7xl mx-auto px-8 lg:px-24">
-                <Reveal className="flex flex-col md:flex-row justify-between items-start gap-12" y={24}>
-                    <div className="space-y-8">
+        <footer className="border-t border-white/5 py-10 sm:py-12 bg-black">
+            <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
+                <Reveal className="flex flex-col md:flex-row justify-between items-start gap-8 lg:gap-12" y={24}>
+                    <div className="space-y-6 sm:space-y-8">
                         <div className="text-2xl font-bold tracking-tighter text-white">
                             E<span className="text-muted">.</span>
                         </div>
-                        <p className="text-muted text-sm font-medium max-w-xs leading-relaxed">
+                        <p className="text-muted text-xs sm:text-sm font-medium max-w-xs leading-relaxed">
                             Crafting high-precision digital products with a focus on impact and scalability.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-16 md:gap-32">
+                    <div className="grid grid-cols-2 gap-8 md:gap-16">
                         <div className="space-y-6">
                             <h4 className="section-label text-white/50">Social</h4>
                             <div className="flex flex-col gap-4">

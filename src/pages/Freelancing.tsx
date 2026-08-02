@@ -61,8 +61,10 @@ export default function Freelancing() {
 
         const handleUpdate = () => loadData();
         window.addEventListener("portfolio-freelancing-updated", handleUpdate);
+        window.addEventListener("storage", handleUpdate);
         return () => {
             window.removeEventListener("portfolio-freelancing-updated", handleUpdate);
+            window.removeEventListener("storage", handleUpdate);
         };
     }, []);
 
@@ -149,7 +151,7 @@ export default function Freelancing() {
 
     return (
         <div className="flex flex-col w-full bg-[#050505] min-h-screen text-white selection:bg-white selection:text-black pt-20 sm:pt-24 pb-16 sm:pb-20 font-sans overflow-x-hidden">
-            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 lg:px-16 space-y-12 sm:space-y-16 md:space-y-24">
+            <div className="max-w-6xl mx-auto w-full px-4 sm:px-8 md:px-12 lg:px-16 space-y-8 sm:space-y-12 lg:space-y-16">
                 
                 {/* 1. HERO SECTION */}
                 <section className="pt-4 sm:pt-10 pb-8 sm:pb-12 border-b border-white/10 relative">
@@ -163,7 +165,7 @@ export default function Freelancing() {
                                 <span className="text-white/80">FREELANCING</span>
                             </div>
 
-                            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tighter text-white leading-[0.95] break-words">
+                            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-white leading-[0.95] break-words">
                                 {heroSettings.title || "FREELANCE SERVICES"}
                             </h1>
 

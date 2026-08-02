@@ -8,11 +8,11 @@ const skills = [
 
 export default function About() {
     return (
-        <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 py-6 sm:py-10 lg:py-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
                 <Reveal className="lg:col-span-4">
-                    <h2 className="section-label mb-8 text-white">About</h2>
-                    <p className="text-4xl md:text-5xl font-bold tracking-tighter leading-tight text-white mb-12">
+                    <h2 className="section-label mb-6 sm:mb-8 text-white">About</h2>
+                    <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter leading-tight text-white mb-6 sm:mb-8">
                         Engineering with <br />
                         clinical precision.
                     </p>
@@ -22,16 +22,15 @@ export default function About() {
                     </div>
                 </Reveal>
 
-                <div className="lg:col-span-8 space-y-12">
+                <div className="lg:col-span-8 space-y-8 sm:space-y-10">
                     <Reveal delay={0.15}>
-                        <p className="text-2xl text-muted font-medium leading-relaxed max-w-2xl">
+                        <p className="text-base sm:text-lg md:text-xl text-muted font-medium leading-relaxed max-w-2xl">
                             I build scalable backend systems and production-grade AI solutions with a strong focus on performance, reliability,
                             and clean architecture. I care about systems that don’t just work — they scale, last, and create real impact.
-
                         </p>
                     </Reveal>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/5 pt-16">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 border-t border-white/5 pt-10">
                         {skills.map((skill, i) => (
                             <Reveal key={skill.category} className="space-y-6" delay={i * 0.12}>
                                 <h3 className="section-label text-white/50">{skill.category}</h3>
@@ -46,12 +45,12 @@ export default function About() {
                         ))}
                     </div>
 
-                    <div className="pt-16 border-t border-white/5">
+                    <div className="pt-10 border-t border-white/5">
                         <Reveal>
-                            <h3 className="section-label mb-12 text-white/50">Trajectory</h3>
+                            <h3 className="section-label mb-6 text-white/50">Trajectory</h3>
                         </Reveal>
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-                            <div className="md:col-span-7 space-y-12">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+                            <div className="md:col-span-7 space-y-6">
                                 {[
                                     { role: "Software Engineer", company: "Portfolio Ventures", period: "2024 — Pres." },
                                     { role: "Data Science Intern", company: "Tech Dynamic", period: "2023 — 2024" },
