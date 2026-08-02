@@ -579,6 +579,19 @@ export const DEFAULT_BOOKINGS: BookingRequest[] = [
     }
 ];
 
+const syncChannel = typeof window !== "undefined" && "BroadcastChannel" in window
+    ? new BroadcastChannel("portfolio_cms_channel")
+    : null;
+
+if (syncChannel) {
+    syncChannel.onmessage = (event) => {
+        if (event.data && event.data.type) {
+            window.dispatchEvent(new Event(event.data.type));
+            window.dispatchEvent(new Event("portfolio-store-updated"));
+        }
+    };
+}
+
 class PortfolioStore {
     private updateTimestamp(): void {
         const now = new Date().toISOString();
@@ -589,6 +602,13 @@ class PortfolioStore {
         this.updateTimestamp();
         window.dispatchEvent(new Event(eventName));
         window.dispatchEvent(new Event("portfolio-store-updated"));
+        if (syncChannel) {
+            try {
+                syncChannel.postMessage({ type: eventName, timestamp: Date.now() });
+            } catch {
+                // ignore
+            }
+        }
     }
 
     public getLastUpdated(): string {
