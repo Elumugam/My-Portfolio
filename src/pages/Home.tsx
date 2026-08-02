@@ -6,7 +6,7 @@ import Projects from "./Projects";
 import Contact from "./Contact";
 import TripO from "./TripO";
 import defaultHeroPhoto from "../assets/hero-transparent.png";
-import { portfolioStore, HeroTransformSettings, HeroTextSettings, AnnouncementSettings } from "../services/portfolioStore";
+import { portfolioStore, getHeroImageStyle, HeroTransformSettings, HeroTextSettings, AnnouncementSettings } from "../services/portfolioStore";
 
 /* Subtle Dot Matrix Grid Component (6x6) */
 const DotGrid = ({ className = "" }: { className?: string }) => (
@@ -105,10 +105,25 @@ export default function Home() {
         portfolioStore.getSectionAnnouncement("connect")
     );
 
+    const imageContainerRef = useRef<HTMLDivElement>(null);
+    const [containerDiameter, setContainerDiameter] = useState<number>(() =>
+        typeof window !== "undefined" && window.innerWidth < 768 ? (window.innerWidth < 360 ? 160 : 180) : 380
+    );
+
     useEffect(() => {
+        const updateDiameter = () => {
+            if (imageContainerRef.current && imageContainerRef.current.offsetWidth > 0) {
+                setContainerDiameter(imageContainerRef.current.offsetWidth);
+            } else {
+                const isMob = window.matchMedia("(max-width: 767px)").matches;
+                setContainerDiameter(isMob ? (window.innerWidth < 360 ? 160 : 180) : 380);
+            }
+        };
+
         const mediaQuery = window.matchMedia("(max-width: 767px)");
         const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
             setIsMobile(e.matches);
+            updateDiameter();
         };
 
         handleMediaChange(mediaQuery);
@@ -126,6 +141,7 @@ export default function Home() {
             setHeroMobileTransform(portfolioStore.getMobileHeroTransform());
             setHeroText(portfolioStore.getHeroText());
             setIsMobile(window.matchMedia("(max-width: 767px)").matches);
+            updateDiameter();
         };
 
         const handleAnnouncementUpdate = () => {
@@ -144,6 +160,8 @@ export default function Home() {
         window.addEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
         window.addEventListener("storage", handleGlobalUpdate);
         window.addEventListener("resize", handleHeroUpdate);
+
+        updateDiameter();
 
         return () => {
             if (mediaQuery.removeEventListener) {
@@ -234,18 +252,12 @@ export default function Home() {
                         <div className="relative z-10 flex items-center justify-center">
                             <div className="relative flex items-center justify-center">
                                 {/* Solid White Circular Hero Container (#FFFFFF) */}
-                                <div className="w-[160px] h-[160px] min-[360px]:w-[180px] min-[360px]:h-[180px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] xl:w-[440px] xl:h-[440px] aspect-square rounded-full bg-white border-none overflow-hidden flex items-center justify-center pointer-events-none shadow-2xl">
+                                <div ref={imageContainerRef} className="w-[160px] h-[160px] min-[360px]:w-[180px] min-[360px]:h-[180px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] xl:w-[440px] xl:h-[440px] aspect-square rounded-full bg-white border-none overflow-hidden flex items-center justify-center pointer-events-none shadow-2xl">
                                     {/* Hero Portrait Image */}
                                     <img
                                         src={currentHeroPhoto}
                                         alt={heroText.name || "R Elumugam"}
-                                        style={{
-                                            width: isMobile ? `${heroMobileTransform.width}px` : `${heroTransform.width * 0.82}px`,
-                                            height: isMobile ? `${heroMobileTransform.height}px` : `${heroTransform.height * 0.82}px`,
-                                            transform: isMobile
-                                                ? `translate(${heroMobileTransform.positionX}px, ${heroMobileTransform.positionY}px) scale(${heroMobileTransform.scale / 100}) rotate(${heroMobileTransform.rotation}deg)`
-                                                : `translate(${heroTransform.positionX}px, ${heroTransform.positionY}px) scale(${heroTransform.scale / 100}) rotate(${heroTransform.rotation}deg)`,
-                                        }}
+                                        style={getHeroImageStyle(isMobile ? heroMobileTransform : heroTransform, containerDiameter, isMobile)}
                                         className="object-cover object-top pointer-events-none transition-transform duration-75 max-w-none max-h-none"
                                     />
                                 </div>

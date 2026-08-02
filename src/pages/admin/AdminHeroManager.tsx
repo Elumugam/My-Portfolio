@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import {
     portfolioStore,
+    getHeroImageStyle,
     HeroImageData,
     HeroTransformSettings,
     HeroTextSettings,
@@ -748,11 +749,7 @@ export default function AdminHeroManager() {
                                 <img
                                     src={previewImage || defaultHeroPhoto}
                                     alt="Live Desktop Preview"
-                                    style={{
-                                        width: `${(heroTransform.width / 480) * 160}px`,
-                                        height: `${(heroTransform.height / 580) * 190}px`,
-                                        transform: `translate(${heroTransform.positionX * 0.35}px, ${heroTransform.positionY * 0.35}px) scale(${heroTransform.scale / 100}) rotate(${heroTransform.rotation}deg)`
-                                    }}
+                                    style={getHeroImageStyle(heroTransform, 170, false)}
                                     className="object-cover object-top pointer-events-none transition-transform duration-75 max-w-none max-h-none"
                                 />
                             </div>
@@ -840,11 +837,7 @@ export default function AdminHeroManager() {
                                         <img
                                             src={previewImage || defaultHeroPhoto}
                                             alt="Live Mobile Preview"
-                                            style={{
-                                                width: `${(heroMobileTransform.width / 280) * 90}px`,
-                                                height: `${(heroMobileTransform.height / 340) * 110}px`,
-                                                transform: `translate(${heroMobileTransform.positionX * 0.3}px, ${heroMobileTransform.positionY * 0.3}px) scale(${heroMobileTransform.scale / 100}) rotate(${heroMobileTransform.rotation}deg)`
-                                            }}
+                                            style={getHeroImageStyle(heroMobileTransform, 100, true)}
                                             className="object-cover object-top pointer-events-none transition-transform duration-75 max-w-none max-h-none"
                                         />
                                     </div>

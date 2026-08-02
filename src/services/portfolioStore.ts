@@ -1197,3 +1197,35 @@ class PortfolioStore {
 }
 
 export const portfolioStore = new PortfolioStore();
+
+export function getHeroImageStyle(
+    transform: HeroTransformSettings,
+    containerDiameter: number,
+    isMobile: boolean
+): { width: string; height: string; transform: string } {
+    if (isMobile) {
+        const scaleFactor = containerDiameter / 100;
+        const width = (transform.width / 280) * 90 * scaleFactor;
+        const height = (transform.height / 340) * 110 * scaleFactor;
+        const posX = transform.positionX * 0.3 * scaleFactor;
+        const posY = transform.positionY * 0.3 * scaleFactor;
+
+        return {
+            width: `${width}px`,
+            height: `${height}px`,
+            transform: `translate(${posX}px, ${posY}px) scale(${transform.scale / 100}) rotate(${transform.rotation}deg)`,
+        };
+    } else {
+        const scaleFactor = containerDiameter / 170;
+        const width = (transform.width / 480) * 160 * scaleFactor;
+        const height = (transform.height / 580) * 190 * scaleFactor;
+        const posX = transform.positionX * 0.35 * scaleFactor;
+        const posY = transform.positionY * 0.35 * scaleFactor;
+
+        return {
+            width: `${width}px`,
+            height: `${height}px`,
+            transform: `translate(${posX}px, ${posY}px) scale(${transform.scale / 100}) rotate(${transform.rotation}deg)`,
+        };
+    }
+}
