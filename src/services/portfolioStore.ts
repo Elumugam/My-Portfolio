@@ -78,10 +78,10 @@ export const DEFAULT_SECTION_ANNOUNCEMENTS: Record<AnnouncementSectionKey, Annou
     hero: {
         enabled: true,
         text: "Available for freelance projects & full-time roles.",
-        buttonText: "LEARN MORE !!!!",
+        buttonText: "LEARN MORE",
         link: "/freelancing",
-        bgColor: "#000000",
-        textColor: "#ffffff",
+        bgColor: "#ffffff",
+        textColor: "#000000",
     },
     about: {
         enabled: false,
@@ -208,10 +208,10 @@ export const DEFAULT_HERO_TEXT: HeroTextSettings = {
 export const DEFAULT_ANNOUNCEMENT: AnnouncementSettings = {
     enabled: true,
     text: "Available for freelance projects & full-time roles.",
-    buttonText: "LEARN MORE !!!!",
+    buttonText: "LEARN MORE",
     link: "/freelancing",
-    bgColor: "#000000",
-    textColor: "#ffffff"
+    bgColor: "#ffffff",
+    textColor: "#000000"
 };
 
 export const DEFAULT_FREELANCING_HERO: FreelancingHeroSettings = {
@@ -233,6 +233,8 @@ const ONGOING_PROJECTS_KEY = "portfolio_ongoing_projects_v1";
 const COMPLETED_PROJECTS_KEY = "portfolio_completed_projects_v1";
 const CLIENT_REVIEWS_KEY = "portfolio_client_reviews_v1";
 const BOOKINGS_KEY = "portfolio_bookings_v1";
+
+export const CMS_BUILD_VERSION = "2026.08.02.v4";
 
 export const DEFAULT_PROJECTS: Project[] = [
     {
@@ -592,7 +594,6 @@ if (syncChannel) {
     };
 }
 
-export const CMS_BUILD_VERSION = "2026.08.02.v3";
 const BUILD_VERSION_KEY = "portfolio_cms_build_version";
 
 class PortfolioStore {

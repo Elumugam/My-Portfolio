@@ -13,13 +13,13 @@ export function runPortfolioStoreTests(): { passed: boolean; log: string[] } {
             log.push("PASS: CMS_BUILD_VERSION is valid.");
         }
 
-        log.push("[Test 2] Hero Announcement Button Text Parity");
+        log.push("[Test 2] Hero Announcement Button & Theme Parity");
         const announcement = portfolioStore.getSectionAnnouncement("hero");
-        if (announcement.buttonText !== "LEARN MORE !!!!") {
-            log.push(`FAIL: Expected 'LEARN MORE !!!!', got '${announcement.buttonText}'`);
+        if (announcement.buttonText !== "LEARN MORE" || announcement.bgColor !== "#ffffff" || announcement.textColor !== "#000000") {
+            log.push(`FAIL: Announcement attributes mismatch (${announcement.buttonText}, ${announcement.bgColor}, ${announcement.textColor})`);
             passed = false;
         } else {
-            log.push(`PASS: Hero announcement button text matches '${announcement.buttonText}'`);
+            log.push(`PASS: Hero announcement matches Admin settings ('${announcement.buttonText}', bg: ${announcement.bgColor}, text: ${announcement.textColor})`);
         }
 
         log.push("[Test 3] Hero Text Content Verification");
