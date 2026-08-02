@@ -592,23 +592,48 @@ if (syncChannel) {
     };
 }
 
+export const CMS_BUILD_VERSION = "2026.08.02.v3";
+const BUILD_VERSION_KEY = "portfolio_cms_build_version";
+
 class PortfolioStore {
     constructor() {
         if (typeof window !== "undefined" && window.localStorage) {
-            const legacyKeys = [
-                "portfolio_announcement_v1",
-                "portfolio_hero_mobile_transform_settings",
-                "portfolio_projects_v1",
-                "portfolio_projects_v2",
-                "portfolio_projects_v3"
-            ];
-            legacyKeys.forEach((key) => {
+            const currentStoredVersion = localStorage.getItem(BUILD_VERSION_KEY);
+            if (currentStoredVersion !== CMS_BUILD_VERSION) {
+                const keysToClear = [
+                    PROJECTS_STORAGE_KEY,
+                    CLIENT_PROJECTS_STORAGE_KEY,
+                    HERO_IMAGE_STORAGE_KEY,
+                    HERO_TRANSFORM_STORAGE_KEY,
+                    HERO_TEXT_STORAGE_KEY,
+                    ANNOUNCEMENT_STORAGE_KEY,
+                    FREELANCING_HERO_STORAGE_KEY,
+                    ONGOING_PROJECTS_KEY,
+                    COMPLETED_PROJECTS_KEY,
+                    CLIENT_REVIEWS_KEY,
+                    "portfolio_announcement_hero",
+                    "portfolio_announcement_about",
+                    "portfolio_announcement_projects",
+                    "portfolio_announcement_connect",
+                    "portfolio_announcement_v1",
+                    "portfolio_hero_mobile_transform_settings",
+                    "portfolio_projects_v1",
+                    "portfolio_projects_v2",
+                    "portfolio_projects_v3"
+                ];
+                keysToClear.forEach((key) => {
+                    try {
+                        localStorage.removeItem(key);
+                    } catch {
+                        // ignore
+                    }
+                });
                 try {
-                    localStorage.removeItem(key);
+                    localStorage.setItem(BUILD_VERSION_KEY, CMS_BUILD_VERSION);
                 } catch {
                     // ignore
                 }
-            });
+            }
         }
     }
 
