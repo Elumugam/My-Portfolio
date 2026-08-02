@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, DragEvent } from "react";
+import { useState, useEffect, ChangeEvent, DragEvent } from "react";
 import {
     Upload, Trash2, Save, Image as ImageIcon, ShieldAlert, Check, RefreshCw, Sliders, Type, RotateCcw, Smartphone, Monitor, Menu
 } from "lucide-react";
@@ -47,6 +47,28 @@ export default function AdminHeroManager() {
     const [error, setError] = useState<string>("");
     const [successMsg, setSuccessMsg] = useState<string>("");
     const [isDragging, setIsDragging] = useState(false);
+
+    useEffect(() => {
+        const syncState = () => {
+            const currentHero = portfolioStore.getHeroImage();
+            if (!pendingFileData) {
+                setPreviewImage(currentHero ? currentHero.imageUrl : null);
+            }
+            setHeroTransform(portfolioStore.getHeroTransform());
+            setHeroMobileTransform(portfolioStore.getMobileHeroTransform());
+            setHeroText(portfolioStore.getHeroText());
+        };
+
+        const syncEvents = [
+            "portfolio-store-updated",
+            "portfolio-hero-updated",
+            "portfolio-announcement-updated",
+            "storage"
+        ];
+
+        syncEvents.forEach((evt) => window.addEventListener(evt, syncState));
+        return () => syncEvents.forEach((evt) => window.removeEventListener(evt, syncState));
+    }, [pendingFileData]);
 
     const validateAndProcessFile = (file: File) => {
         setError("");
@@ -837,7 +859,7 @@ export default function AdminHeroManager() {
                                         <img
                                             src={previewImage || defaultHeroPhoto}
                                             alt="Live Mobile Preview"
-                                            style={getHeroImageStyle(heroMobileTransform, 100, true)}
+                                            style={getHeroImageStyle(heroTransform, 100, true)}
                                             className="object-cover object-top pointer-events-none transition-transform duration-75 max-w-none max-h-none"
                                         />
                                     </div>

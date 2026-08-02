@@ -915,23 +915,15 @@ class PortfolioStore {
     }
 
     public getMobileHeroTransform(): HeroTransformSettings {
-        const stored = localStorage.getItem(HERO_MOBILE_TRANSFORM_STORAGE_KEY);
-        if (!stored) return DEFAULT_HERO_MOBILE_TRANSFORM;
-        try {
-            return { ...DEFAULT_HERO_MOBILE_TRANSFORM, ...JSON.parse(stored) };
-        } catch {
-            return DEFAULT_HERO_MOBILE_TRANSFORM;
-        }
+        return this.getHeroTransform();
     }
 
     public saveMobileHeroTransform(settings: HeroTransformSettings): void {
-        localStorage.setItem(HERO_MOBILE_TRANSFORM_STORAGE_KEY, JSON.stringify(settings));
-        this.notifyUpdate("portfolio-hero-updated");
+        this.saveHeroTransform(settings);
     }
 
     public resetMobileHeroTransform(): void {
-        localStorage.removeItem(HERO_MOBILE_TRANSFORM_STORAGE_KEY);
-        this.notifyUpdate("portfolio-hero-updated");
+        this.resetHeroTransform();
     }
 
     public getHeroText(): HeroTextSettings {
@@ -1214,8 +1206,8 @@ export function getHeroImageStyle(
 ): { width: string; height: string; transform: string } {
     if (isMobile) {
         const scaleFactor = containerDiameter / 100;
-        const width = (transform.width / 280) * 90 * scaleFactor;
-        const height = (transform.height / 340) * 110 * scaleFactor;
+        const width = (transform.width / 480) * 90 * scaleFactor;
+        const height = (transform.height / 580) * 110 * scaleFactor;
         const posX = transform.positionX * 0.3 * scaleFactor;
         const posY = transform.positionY * 0.3 * scaleFactor;
 

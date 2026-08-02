@@ -264,7 +264,7 @@ export default function Home() {
                                     <img
                                         src={currentHeroPhoto}
                                         alt={heroText.name || "R Elumugam"}
-                                        style={getHeroImageStyle(isMobile ? heroMobileTransform : heroTransform, containerDiameter, isMobile)}
+                                        style={getHeroImageStyle(heroTransform, containerDiameter, isMobile)}
                                         className="object-cover object-top pointer-events-none transition-transform duration-75 max-w-none max-h-none"
                                     />
                                 </div>
