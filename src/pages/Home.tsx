@@ -86,7 +86,10 @@ export default function Home() {
         portfolioStore.getHeroText()
     );
 
-    const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth < 768);
+    const [isMobile, setIsMobile] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return window.matchMedia("(max-width: 767px)").matches;
+    });
 
     // Independent 4 Section Announcement States
     const [heroAnnouncement, setHeroAnnouncement] = useState<AnnouncementSettings>(() =>
@@ -103,8 +106,18 @@ export default function Home() {
     );
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        window.addEventListener("resize", handleResize);
+        const mediaQuery = window.matchMedia("(max-width: 767px)");
+        const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
+            setIsMobile(e.matches);
+        };
+
+        handleMediaChange(mediaQuery);
+
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener("change", handleMediaChange);
+        } else {
+            mediaQuery.addListener(handleMediaChange);
+        }
 
         const handleHeroUpdate = () => {
             const customHero = portfolioStore.getHeroImage();
@@ -112,6 +125,7 @@ export default function Home() {
             setHeroTransform(portfolioStore.getHeroTransform());
             setHeroMobileTransform(portfolioStore.getMobileHeroTransform());
             setHeroText(portfolioStore.getHeroText());
+            setIsMobile(window.matchMedia("(max-width: 767px)").matches);
         };
 
         const handleAnnouncementUpdate = () => {
@@ -129,15 +143,20 @@ export default function Home() {
         window.addEventListener("portfolio-hero-updated", handleHeroUpdate);
         window.addEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
         window.addEventListener("storage", handleGlobalUpdate);
+        window.addEventListener("resize", handleHeroUpdate);
+
         return () => {
-            window.removeEventListener("resize", handleResize);
+            if (mediaQuery.removeEventListener) {
+                mediaQuery.removeEventListener("change", handleMediaChange);
+            } else {
+                mediaQuery.removeListener(handleMediaChange);
+            }
             window.removeEventListener("portfolio-hero-updated", handleHeroUpdate);
             window.removeEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
             window.removeEventListener("storage", handleGlobalUpdate);
+            window.removeEventListener("resize", handleHeroUpdate);
         };
     }, []);
-
-    const activeTransform = isMobile ? heroMobileTransform : heroTransform;
 
     return (
         <div className="flex flex-col w-full bg-black relative selection:bg-white selection:text-black">
@@ -221,9 +240,11 @@ export default function Home() {
                                         src={currentHeroPhoto}
                                         alt={heroText.name || "R Elumugam"}
                                         style={{
-                                            width: isMobile ? `${activeTransform.width}px` : `${activeTransform.width * 0.82}px`,
-                                            height: isMobile ? `${activeTransform.height}px` : `${activeTransform.height * 0.82}px`,
-                                            transform: `translate(${activeTransform.positionX}px, ${activeTransform.positionY}px) scale(${activeTransform.scale / 100}) rotate(${activeTransform.rotation}deg)`,
+                                            width: isMobile ? `${heroMobileTransform.width}px` : `${heroTransform.width * 0.82}px`,
+                                            height: isMobile ? `${heroMobileTransform.height}px` : `${heroTransform.height * 0.82}px`,
+                                            transform: isMobile
+                                                ? `translate(${heroMobileTransform.positionX}px, ${heroMobileTransform.positionY}px) scale(${heroMobileTransform.scale / 100}) rotate(${heroMobileTransform.rotation}deg)`
+                                                : `translate(${heroTransform.positionX}px, ${heroTransform.positionY}px) scale(${heroTransform.scale / 100}) rotate(${heroTransform.rotation}deg)`,
                                         }}
                                         className="object-cover object-top pointer-events-none transition-transform duration-75 max-w-none max-h-none"
                                     />
