@@ -585,6 +585,12 @@ class PortfolioStore {
         localStorage.setItem(LAST_UPDATED_KEY, now);
     }
 
+    private notifyUpdate(eventName: string): void {
+        this.updateTimestamp();
+        window.dispatchEvent(new Event(eventName));
+        window.dispatchEvent(new Event("portfolio-store-updated"));
+    }
+
     public getLastUpdated(): string {
         const stored = localStorage.getItem(LAST_UPDATED_KEY);
         if (!stored) {
@@ -636,8 +642,7 @@ class PortfolioStore {
     public saveProjects(projects: Project[], notify = true): void {
         localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects));
         if (notify) {
-            this.updateTimestamp();
-            window.dispatchEvent(new Event("portfolio-projects-updated"));
+            this.notifyUpdate("portfolio-projects-updated");
         }
     }
 
@@ -742,8 +747,7 @@ class PortfolioStore {
     public saveClientProjects(projects: ClientProject[], notify = true): void {
         localStorage.setItem(CLIENT_PROJECTS_STORAGE_KEY, JSON.stringify(projects));
         if (notify) {
-            this.updateTimestamp();
-            window.dispatchEvent(new Event("portfolio-freelancing-updated"));
+            this.notifyUpdate("portfolio-freelancing-updated");
         }
     }
 
@@ -862,14 +866,12 @@ class PortfolioStore {
 
     public saveHeroImage(heroData: HeroImageData): void {
         localStorage.setItem(HERO_IMAGE_STORAGE_KEY, JSON.stringify(heroData));
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public deleteHeroImage(): void {
         localStorage.removeItem(HERO_IMAGE_STORAGE_KEY);
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public getHeroTransform(): HeroTransformSettings {
@@ -884,14 +886,12 @@ class PortfolioStore {
 
     public saveHeroTransform(settings: HeroTransformSettings): void {
         localStorage.setItem(HERO_TRANSFORM_STORAGE_KEY, JSON.stringify(settings));
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public resetHeroTransform(): void {
         localStorage.removeItem(HERO_TRANSFORM_STORAGE_KEY);
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public getMobileHeroTransform(): HeroTransformSettings {
@@ -906,14 +906,12 @@ class PortfolioStore {
 
     public saveMobileHeroTransform(settings: HeroTransformSettings): void {
         localStorage.setItem(HERO_MOBILE_TRANSFORM_STORAGE_KEY, JSON.stringify(settings));
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public resetMobileHeroTransform(): void {
         localStorage.removeItem(HERO_MOBILE_TRANSFORM_STORAGE_KEY);
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public getHeroText(): HeroTextSettings {
@@ -928,14 +926,12 @@ class PortfolioStore {
 
     public saveHeroText(settings: HeroTextSettings): void {
         localStorage.setItem(HERO_TEXT_STORAGE_KEY, JSON.stringify(settings));
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public resetHeroText(): void {
         localStorage.removeItem(HERO_TEXT_STORAGE_KEY);
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-hero-updated"));
+        this.notifyUpdate("portfolio-hero-updated");
     }
 
     public getAnnouncement(): AnnouncementSettings {
@@ -979,8 +975,7 @@ class PortfolioStore {
         if (section === "hero") {
             localStorage.setItem(ANNOUNCEMENT_STORAGE_KEY, JSON.stringify(settings));
         }
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-announcement-updated"));
+        this.notifyUpdate("portfolio-announcement-updated");
     }
 
     public resetSectionAnnouncement(section: AnnouncementSectionKey): void {
@@ -989,8 +984,7 @@ class PortfolioStore {
         if (section === "hero") {
             localStorage.removeItem(ANNOUNCEMENT_STORAGE_KEY);
         }
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-announcement-updated"));
+        this.notifyUpdate("portfolio-announcement-updated");
     }
 
     // ==========================================
@@ -1012,8 +1006,7 @@ class PortfolioStore {
     public saveOngoingProjects(projects: OngoingProject[], notify = true): void {
         localStorage.setItem(ONGOING_PROJECTS_KEY, JSON.stringify(projects));
         if (notify) {
-            this.updateTimestamp();
-            window.dispatchEvent(new Event("portfolio-freelancing-updated"));
+            this.notifyUpdate("portfolio-freelancing-updated");
         }
     }
 
@@ -1058,8 +1051,7 @@ class PortfolioStore {
     public saveCompletedProjects(projects: CompletedProject[], notify = true): void {
         localStorage.setItem(COMPLETED_PROJECTS_KEY, JSON.stringify(projects));
         if (notify) {
-            this.updateTimestamp();
-            window.dispatchEvent(new Event("portfolio-freelancing-updated"));
+            this.notifyUpdate("portfolio-freelancing-updated");
         }
     }
 
@@ -1104,8 +1096,7 @@ class PortfolioStore {
     public saveClientReviews(reviews: ClientReview[], notify = true): void {
         localStorage.setItem(CLIENT_REVIEWS_KEY, JSON.stringify(reviews));
         if (notify) {
-            this.updateTimestamp();
-            window.dispatchEvent(new Event("portfolio-freelancing-updated"));
+            this.notifyUpdate("portfolio-freelancing-updated");
         }
     }
 
@@ -1147,8 +1138,7 @@ class PortfolioStore {
     public saveBookings(bookings: BookingRequest[], notify = true): void {
         localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
         if (notify) {
-            this.updateTimestamp();
-            window.dispatchEvent(new Event("portfolio-freelancing-updated"));
+            this.notifyUpdate("portfolio-freelancing-updated");
         }
     }
 
@@ -1191,8 +1181,7 @@ class PortfolioStore {
 
     public saveFreelancingHero(settings: FreelancingHeroSettings): void {
         localStorage.setItem(FREELANCING_HERO_STORAGE_KEY, JSON.stringify(settings));
-        this.updateTimestamp();
-        window.dispatchEvent(new Event("portfolio-freelancing-updated"));
+        this.notifyUpdate("portfolio-freelancing-updated");
     }
 }
 

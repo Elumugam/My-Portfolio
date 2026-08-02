@@ -15,11 +15,20 @@ export default function TripO() {
             setTripoData(found || null);
         };
 
-        window.addEventListener("portfolio-projects-updated", handleUpdate);
-        window.addEventListener("storage", handleUpdate);
+        const syncEvents = [
+            "portfolio-store-updated",
+            "portfolio-projects-updated",
+            "storage",
+            "focus",
+            "pageshow"
+        ];
+
+        syncEvents.forEach((evt) => window.addEventListener(evt, handleUpdate));
+        document.addEventListener("visibilitychange", handleUpdate);
+
         return () => {
-            window.removeEventListener("portfolio-projects-updated", handleUpdate);
-            window.removeEventListener("storage", handleUpdate);
+            syncEvents.forEach((evt) => window.removeEventListener(evt, handleUpdate));
+            document.removeEventListener("visibilitychange", handleUpdate);
         };
     }, []);
 

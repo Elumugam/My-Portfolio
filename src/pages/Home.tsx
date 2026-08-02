@@ -156,10 +156,18 @@ export default function Home() {
             handleAnnouncementUpdate();
         };
 
-        window.addEventListener("portfolio-hero-updated", handleHeroUpdate);
-        window.addEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
-        window.addEventListener("storage", handleGlobalUpdate);
+        const syncEvents = [
+            "portfolio-store-updated",
+            "portfolio-hero-updated",
+            "portfolio-announcement-updated",
+            "storage",
+            "focus",
+            "pageshow"
+        ];
+
+        syncEvents.forEach((evt) => window.addEventListener(evt, handleGlobalUpdate));
         window.addEventListener("resize", handleHeroUpdate);
+        document.addEventListener("visibilitychange", handleGlobalUpdate);
 
         updateDiameter();
 
@@ -169,10 +177,9 @@ export default function Home() {
             } else {
                 mediaQuery.removeListener(handleMediaChange);
             }
-            window.removeEventListener("portfolio-hero-updated", handleHeroUpdate);
-            window.removeEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
-            window.removeEventListener("storage", handleGlobalUpdate);
+            syncEvents.forEach((evt) => window.removeEventListener(evt, handleGlobalUpdate));
             window.removeEventListener("resize", handleHeroUpdate);
+            document.removeEventListener("visibilitychange", handleGlobalUpdate);
         };
     }, []);
 
