@@ -78,7 +78,7 @@ export const DEFAULT_SECTION_ANNOUNCEMENTS: Record<AnnouncementSectionKey, Annou
     hero: {
         enabled: true,
         text: "Available for freelance projects & full-time roles.",
-        buttonText: "Book A Project",
+        buttonText: "LEARN MORE !!!!",
         link: "/freelancing",
         bgColor: "#000000",
         textColor: "#ffffff",
@@ -206,9 +206,9 @@ export const DEFAULT_HERO_TEXT: HeroTextSettings = {
 };
 
 export const DEFAULT_ANNOUNCEMENT: AnnouncementSettings = {
-    enabled: false,
-    text: "Available for Freelance Projects",
-    buttonText: "Learn More",
+    enabled: true,
+    text: "Available for freelance projects & full-time roles.",
+    buttonText: "LEARN MORE !!!!",
     link: "/freelancing",
     bgColor: "#000000",
     textColor: "#ffffff"
