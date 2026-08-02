@@ -593,6 +593,25 @@ if (syncChannel) {
 }
 
 class PortfolioStore {
+    constructor() {
+        if (typeof window !== "undefined" && window.localStorage) {
+            const legacyKeys = [
+                "portfolio_announcement_v1",
+                "portfolio_hero_mobile_transform_settings",
+                "portfolio_projects_v1",
+                "portfolio_projects_v2",
+                "portfolio_projects_v3"
+            ];
+            legacyKeys.forEach((key) => {
+                try {
+                    localStorage.removeItem(key);
+                } catch {
+                    // ignore
+                }
+            });
+        }
+    }
+
     private updateTimestamp(): void {
         const now = new Date().toISOString();
         localStorage.setItem(LAST_UPDATED_KEY, now);
