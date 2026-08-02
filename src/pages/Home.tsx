@@ -1,124 +1,258 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDown, Instagram, Facebook, Linkedin } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import About from "./About";
 import Projects from "./Projects";
 import Contact from "./Contact";
 import TripO from "./TripO";
+import defaultHeroPhoto from "../assets/hero-transparent.png";
+import { portfolioStore, HeroTransformSettings, HeroTextSettings, AnnouncementSettings } from "../services/portfolioStore";
 
-const words = ["Develop.", "Create.", "Build.", "Innovate.", "Launch.", "Transform."];
+/* Subtle Dot Matrix Grid Component (6x6) */
+const DotGrid = ({ className = "" }: { className?: string }) => (
+    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className={className}>
+        {Array.from({ length: 6 }).map((_, row) =>
+            Array.from({ length: 6 }).map((_, col) => (
+                <circle
+                    key={`${row}-${col}`}
+                    cx={12 + col * 20}
+                    cy={12 + row * 20}
+                    r="1.5"
+                    fill="white"
+                    fillOpacity="0.15"
+                />
+            ))
+        )}
+    </svg>
+);
+
+const socials = [
+    { Icon: Github, href: "https://github.com/Elumugam", label: "GitHub" },
+    { Icon: Linkedin, href: "https://www.linkedin.com/in/elumugam-r-201b06292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", label: "LinkedIn" },
+    { Icon: Instagram, href: "https://www.instagram.com/_ezhumugam?igsh=NGM0bzJsdGdpN3lm&utm_source=qr", label: "Instagram" },
+    { Icon: Mail, href: "mailto:elumugame@gmail.com", label: "Email" },
+];
+
+const SectionAnnouncementBar = ({ settings }: { settings: AnnouncementSettings }) => {
+    if (!settings || !settings.enabled) return null;
+    const isExternal = settings.link && (settings.link.startsWith("http://") || settings.link.startsWith("https://"));
+    return (
+        <div
+            className="w-full border-y border-white/10 py-3.5 px-6 flex items-center justify-center transition-all duration-300 z-20"
+            style={{
+                backgroundColor: settings.bgColor || "#000000",
+                color: settings.textColor || "#ffffff"
+            }}
+        >
+            <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-center text-xs sm:text-sm font-medium tracking-wide">
+                <span>{settings.text}</span>
+                {settings.buttonText && (
+                    isExternal ? (
+                        <a
+                            href={settings.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-current text-[11px] font-bold uppercase tracking-wider hover:opacity-80 transition-opacity"
+                        >
+                            {settings.buttonText}
+                        </a>
+                    ) : (
+                        <Link
+                            to={settings.link || "/freelancing"}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-current text-[11px] font-bold uppercase tracking-wider hover:opacity-80 transition-opacity"
+                        >
+                            {settings.buttonText}
+                        </Link>
+                    )
+                )}
+            </div>
+        </div>
+    );
+};
 
 export default function Home() {
-    const [currentWord, setCurrentWord] = useState(0);
+    const heroRef = useRef<HTMLElement>(null);
+    const [currentHeroPhoto, setCurrentHeroPhoto] = useState<string>(() => {
+        const customHero = portfolioStore.getHeroImage();
+        return customHero ? customHero.imageUrl : defaultHeroPhoto;
+    });
+    const [heroTransform, setHeroTransform] = useState<HeroTransformSettings>(() =>
+        portfolioStore.getHeroTransform()
+    );
+    const [heroMobileTransform, setHeroMobileTransform] = useState<HeroTransformSettings>(() =>
+        portfolioStore.getMobileHeroTransform()
+    );
+    const [heroText, setHeroText] = useState<HeroTextSettings>(() =>
+        portfolioStore.getHeroText()
+    );
+
+    const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth < 768);
+
+    // Independent 4 Section Announcement States
+    const [heroAnnouncement, setHeroAnnouncement] = useState<AnnouncementSettings>(() =>
+        portfolioStore.getSectionAnnouncement("hero")
+    );
+    const [aboutAnnouncement, setAboutAnnouncement] = useState<AnnouncementSettings>(() =>
+        portfolioStore.getSectionAnnouncement("about")
+    );
+    const [projectsAnnouncement, setProjectsAnnouncement] = useState<AnnouncementSettings>(() =>
+        portfolioStore.getSectionAnnouncement("projects")
+    );
+    const [connectAnnouncement, setConnectAnnouncement] = useState<AnnouncementSettings>(() =>
+        portfolioStore.getSectionAnnouncement("connect")
+    );
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentWord((prev) => (prev + 1) % words.length);
-        }, 1800);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener("resize", handleResize);
 
-        return () => clearInterval(interval);
+        const handleHeroUpdate = () => {
+            const customHero = portfolioStore.getHeroImage();
+            setCurrentHeroPhoto(customHero ? customHero.imageUrl : defaultHeroPhoto);
+            setHeroTransform(portfolioStore.getHeroTransform());
+            setHeroMobileTransform(portfolioStore.getMobileHeroTransform());
+            setHeroText(portfolioStore.getHeroText());
+        };
+
+        const handleAnnouncementUpdate = () => {
+            setHeroAnnouncement(portfolioStore.getSectionAnnouncement("hero"));
+            setAboutAnnouncement(portfolioStore.getSectionAnnouncement("about"));
+            setProjectsAnnouncement(portfolioStore.getSectionAnnouncement("projects"));
+            setConnectAnnouncement(portfolioStore.getSectionAnnouncement("connect"));
+        };
+
+        window.addEventListener("portfolio-hero-updated", handleHeroUpdate);
+        window.addEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("portfolio-hero-updated", handleHeroUpdate);
+            window.removeEventListener("portfolio-announcement-updated", handleAnnouncementUpdate);
+        };
     }, []);
 
+    const activeTransform = isMobile ? heroMobileTransform : heroTransform;
+
     return (
-        <div className="flex flex-col w-full bg-black noise-bg relative">
+        <div className="flex flex-col w-full bg-black relative selection:bg-white selection:text-black">
             {/* HERO SECTION */}
-            <section id="hero" className="hero relative min-h-screen flex flex-col justify-center px-8 lg:px-24 overflow-hidden">
-                <div className="max-w-7xl mx-auto w-full flex justify-center items-center z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                        className="w-full max-w-4xl flex flex-col items-center text-center space-y-12"
-                    >
-                        <h1 className="font-bold tracking-tighter leading-[0.85] text-white" style={{ fontSize: 'clamp(60px, 14vw, 120px)' }}>
-                            <span id="word-design" className="anim-platform inline-block">Design</span> <br />
-                            <span
-                                id="word-develop"
-                                className="anim-platform relative inline-block align-baseline overflow-hidden whitespace-nowrap"
-                                style={{ width: '10.5ch', minHeight: '1em' }}
-                            >
-                                <AnimatePresence mode="wait" initial={false}>
-                                    <motion.span
-                                        key={words[currentWord]}
-                                        className="absolute inset-0 block"
-                                        initial={currentWord === 0 ? false : { opacity: 0, y: 18 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -18 }}
-                                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                                    >
-                                        {words[currentWord]}
-                                    </motion.span>
-                                </AnimatePresence>
-                            </span> <br />
-                            <span id="word-scale" className="text-white/10 italic anim-platform inline-block">Scale</span>
+            <section
+                ref={heroRef}
+                id="hero"
+                className="relative w-full min-h-[85vh] lg:min-h-screen max-h-[920px] bg-black overflow-hidden flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-16 pt-20 sm:pt-24 pb-8 sm:pb-12"
+            >
+                {/* Subtle Background Vector Elements */}
+                <DotGrid className="absolute top-28 right-8 md:right-16 pointer-events-none z-0" />
+                <DotGrid className="absolute bottom-12 left-8 md:left-16 pointer-events-none z-0" />
+
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
+                    <path
+                        d="M -60, 480 Q 360, 160 480, 780"
+                        stroke="white"
+                        strokeOpacity="0.08"
+                        strokeWidth="1.2"
+                        fill="none"
+                    />
+                    <circle cx="260" cy="285" r="3" fill="#ffffff" />
+                    <circle cx="260" cy="285" r="9" fill="#ffffff" fillOpacity="0.2" className="animate-pulse" />
+                    <circle cx="455" cy="690" r="3" fill="#ffffff" />
+                    <circle cx="455" cy="690" r="9" fill="#ffffff" fillOpacity="0.2" className="animate-pulse" />
+                </svg>
+
+                {/* Main Hero Content Grid (2-Column Layout on Desktop & Mobile down to 360px) */}
+                <div className="max-w-6xl mx-auto w-full flex flex-col min-[360px]:grid min-[360px]:grid-cols-12 gap-4 sm:gap-6 lg:gap-10 items-center z-10">
+                    {/* Left Side Column (Content: 55% width -> col-span-7) */}
+                    <div className="order-2 min-[360px]:order-1 min-[360px]:col-span-7 flex flex-col justify-center items-start text-left pt-2 lg:pt-0">
+                        {/* Name */}
+                        <h1 className="font-extrabold tracking-tighter text-white uppercase text-2xl min-[360px]:text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl leading-[0.95] break-words">
+                            {heroText.name || "R ELUMUGAM"}
                         </h1>
 
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.8 }}
-                            className="flex items-center justify-center flex-wrap gap-6 md:gap-8 mt-6 md:mt-4 relative z-20 w-full"
-                        >
-                            <a 
-                                href="https://www.instagram.com/_ezhumugam?igsh=NGM0bzJsdGdpN3lm&utm_source=qr" 
-                                target="_blank" 
-                                rel="noreferrer" 
-                                className="social-icon-link"
-                            >
-                                <Instagram size={28} />
-                            </a>
-                            <a 
-                                href="https://www.facebook.com/share/1CBTK16MsN/?mibextid=wwXIfr" 
-                                target="_blank" 
-                                rel="noreferrer" 
-                                className="social-icon-link"
-                            >
-                                <Facebook size={28} />
-                            </a>
-                            <a 
-                                href="https://www.linkedin.com/in/elumugam-r-201b06292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
-                                target="_blank" 
-                                rel="noreferrer" 
-                                className="social-icon-link"
-                            >
-                                <Linkedin size={28} />
-                            </a>
-                        </motion.div>
-                    </motion.div>
-                </div>
+                        {/* Roles */}
+                        <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center justify-start gap-1 sm:gap-4 text-white/50 text-[11px] min-[360px]:text-xs sm:text-base md:text-lg font-light tracking-wide">
+                            <span>{heroText.role1}</span>
+                            {heroText.separator && (
+                                <span className="hidden sm:inline text-white/20">{heroText.separator}</span>
+                            )}
+                            <span>{heroText.role2}</span>
+                        </div>
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 2 }}
-                    className="absolute bottom-12 left-8 text-muted flex items-center gap-6"
-                >
-                    <ArrowDown size={20} strokeWidth={1} className="animate-bounce" />
-                    <span className="text-[10px] font-bold tracking-[0.3em] uppercase opacity-40"></span>
-                </motion.div>
+                        {/* Primary Button */}
+                        <div className="mt-4 sm:mt-8">
+                            <a
+                                href="#projects"
+                                className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-7 py-2.5 sm:py-3 rounded-full border border-white/20 bg-white/[0.03] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.03)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] focus:ring-2 focus:ring-white/40 focus:outline-none min-h-[38px] sm:min-h-[44px]"
+                            >
+                                {heroText.buttonText || "VIEW PROJECTS"}
+                            </a>
+                        </div>
 
-                {/* Background Elements — UNTOUCHED */}
-                <div className="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden">
-                    <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-white/[0.02] blur-[150px] rounded-full" />
-                    <div className="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] bg-white/[0.01] blur-[120px] rounded-full" />
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+                        {/* Social Icons */}
+                        <div className="flex items-center justify-start gap-2.5 sm:gap-4 mt-6 sm:mt-8 lg:mt-14">
+                            {socials.map(({ Icon, href, label }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    aria-label={label}
+                                    className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 hover:bg-white/[0.08] hover:scale-105 transition-all duration-300 focus:ring-2 focus:ring-white/40 focus:outline-none"
+                                >
+                                    <Icon size={16} className="sm:w-[18px] sm:h-[18px]" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right Side Column (Hero Image: 45% width -> col-span-5) */}
+                    <div className="order-1 min-[360px]:order-2 min-[360px]:col-span-5 relative flex items-center justify-center min-[360px]:justify-end h-full py-2 lg:py-6">
+                        <div className="relative z-10 flex items-center justify-center">
+                            <div className="relative flex items-center justify-center">
+                                {/* Solid White Circular Hero Container (#FFFFFF) */}
+                                <div className="w-[160px] h-[160px] min-[360px]:w-[180px] min-[360px]:h-[180px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] xl:w-[440px] xl:h-[440px] aspect-square rounded-full bg-white border-none overflow-hidden flex items-center justify-center pointer-events-none shadow-2xl">
+                                    {/* Hero Portrait Image */}
+                                    <img
+                                        src={currentHeroPhoto}
+                                        alt={heroText.name || "R Elumugam"}
+                                        style={{
+                                            width: isMobile ? `${activeTransform.width}px` : `${activeTransform.width * 0.82}px`,
+                                            height: isMobile ? `${activeTransform.height}px` : `${activeTransform.height * 0.82}px`,
+                                            transform: `translate(${activeTransform.positionX}px, ${activeTransform.positionY}px) scale(${activeTransform.scale / 100}) rotate(${activeTransform.rotation}deg)`,
+                                        }}
+                                        className="object-cover object-top pointer-events-none transition-transform duration-75 max-w-none max-h-none"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {/* SECTIONS — UNTOUCHED except TripO added */}
+            {/* HERO ANNOUNCEMENT BAR */}
+            <SectionAnnouncementBar settings={heroAnnouncement} />
+
+            {/* SECTIONS */}
             <div className="relative">
                 <section id="about" className="py-12 border-t border-white/5">
                     <About />
                 </section>
+                {/* ABOUT ANNOUNCEMENT BAR */}
+                <SectionAnnouncementBar settings={aboutAnnouncement} />
+
                 <section id="projects" className="py-12 border-t border-white/5">
                     <Projects />
                 </section>
+                {/* PROJECTS ANNOUNCEMENT BAR */}
+                <SectionAnnouncementBar settings={projectsAnnouncement} />
+
                 <section id="tripo" className="py-12 border-t border-white/5">
                     <TripO />
                 </section>
+
                 <section id="contact" className="py-12 border-t border-white/5">
                     <Contact />
                 </section>
+                {/* CONNECT ANNOUNCEMENT BAR */}
+                <SectionAnnouncementBar settings={connectAnnouncement} />
             </div>
         </div>
     );

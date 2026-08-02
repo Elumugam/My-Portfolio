@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
+import Reveal from "../components/Reveal";
 
 export default function TripO() {
     return (
-        <div className="max-w-7xl mx-auto px-8 lg:px-24 py-12">
+        <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
                 {/* Left — label + title */}
-                <div className="lg:col-span-4">
+                <Reveal className="lg:col-span-4">
                     <h2 className="section-label mb-8 text-white">Featured Project</h2>
                     <p className="text-4xl md:text-5xl font-bold tracking-tighter leading-tight text-white mb-6">
                         TripO
@@ -17,10 +18,10 @@ export default function TripO() {
                         <div className="line-accent bg-white w-12 h-[1px] opacity-30" />
                         <p className="text-muted text-xs font-bold tracking-widest uppercase">AI-Powered</p>
                     </div>
-                </div>
+                </Reveal>
 
                 {/* Right — description + button */}
-                <div className="lg:col-span-8 flex flex-col justify-center space-y-12">
+                <Reveal className="lg:col-span-8 flex flex-col justify-center space-y-12" delay={0.15}>
                     <p className="text-2xl text-muted font-medium leading-relaxed max-w-2xl">
                         TripO is an AI-powered travel platform designed to help users discover places,
                         plan trips, explore destinations, and connect with communities through a smarter
@@ -44,7 +45,7 @@ export default function TripO() {
                             tripoapp.in
                         </span>
                     </div>
-                </div>
+                </Reveal>
             </div>
         </div>
     );

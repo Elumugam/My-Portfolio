@@ -1,6 +1,7 @@
 import { Send, CheckCircle2 } from "lucide-react";
 import { useState, useRef } from "react";
 import emailjs from '@emailjs/browser';
+import Reveal from "../components/Reveal";
 
 export default function Contact() {
     const form = useRef<HTMLFormElement>(null);
@@ -27,9 +28,9 @@ export default function Contact() {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-8 lg:px-24 py-12">
+        <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
-                <div className="lg:col-span-5 space-y-12">
+                <Reveal className="lg:col-span-5 space-y-12">
                     <div>
                         <h2 className="section-label mb-8 text-white">Contact</h2>
                         <p className="text-6xl font-bold tracking-tighter text-white">Let's connect.</p>
@@ -47,9 +48,10 @@ export default function Contact() {
                             <p className="text-muted text-[10px] font-bold tracking-widest uppercase">Coimbatore, India</p>
                         </div>
                     </div>
-                </div>
+                </Reveal>
 
                 <div className="lg:col-span-7">
+                    <Reveal delay={0.15}>
                     <form ref={form} onSubmit={handleSubmit} className="space-y-12">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                             <div className="space-y-4 border-b border-white/10 pb-4 focus-within:border-white transition-colors">
@@ -109,11 +111,12 @@ export default function Contact() {
                             )}
                         </button>
                     </form>
+                    </Reveal>
                 </div>
             </div>
 
             {/* Technology Marquee Section */}
-            <div className="mt-16 w-full overflow-hidden border-t border-white/5 pt-16">
+            <Reveal className="mt-16 w-full overflow-hidden border-t border-white/5 pt-16">
                 <style>
                     {`
                     @keyframes marquee {
@@ -158,7 +161,7 @@ export default function Contact() {
                         <TechIcons />
                     </div>
                 </div>
-            </div>
+            </Reveal>
         </div>
     );
 }

@@ -1,8 +1,10 @@
+import Reveal from "./Reveal";
+
 export default function Footer() {
     return (
         <footer className="border-t border-white/5 py-12 bg-black">
             <div className="max-w-7xl mx-auto px-8 lg:px-24">
-                <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+                <Reveal className="flex flex-col md:flex-row justify-between items-start gap-12" y={24}>
                     <div className="space-y-8">
                         <div className="text-2xl font-bold tracking-tighter text-white">
                             E<span className="text-muted">.</span>
@@ -29,16 +31,20 @@ export default function Footer() {
                             </p>
                         </div>
                     </div>
-                </div>
+                </Reveal>
 
-                <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <Reveal className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6" y={16} delay={0.1}>
                     <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
                         © {new Date().getFullYear()} R Elumugam. All rights reserved.
                     </p>
-                    <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
-                        Designed for precision.
-                    </p>
-                </div>
+                    <div className="flex items-center gap-4">
+
+                        <span className="text-white/10">&bull;</span>
+                        <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
+                            Designed for precision.
+                        </p>
+                    </div>
+                </Reveal>
             </div>
         </footer>
     );
